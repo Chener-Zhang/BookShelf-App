@@ -1,6 +1,6 @@
 
 package Assignment0;
-
+import java.lang.Math.*;
 
 public class Shape{
     
@@ -15,20 +15,19 @@ public class Shape{
     
     
     public String getName() {
-
+        System.out.println(name);
         return name;
     }
     
     
     public double getArea() {
-
         return 0.0;
     }
     
     public void printDimensions()
     {
         System.out.println("No dimensions");
-        }
+    }
 
 
 }

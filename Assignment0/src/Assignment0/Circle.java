@@ -9,6 +9,9 @@ class Circle extends Shape{
       this.radius = radius;
   }
 
-
+    @Override
+    public double getArea() {
+        return 0.0;
+    }
 }
 

@@ -10,9 +10,13 @@ package Assignment0;
  * @author tuh12085
  */
 public class Shape{
+    
     private String name;
+    
+    
     public Shape(String name)
-    {this.name = name;
+    {
+        this.name = name;
     }
     
     

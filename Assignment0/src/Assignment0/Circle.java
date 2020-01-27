@@ -9,7 +9,7 @@ package Assignment0;
  *
  * @author tuh12085
  */
-public class Circle extends Shape{
+class Circle extends Shape{
     public void Circle(int radius){
         
     }

@@ -11,7 +11,10 @@ class Circle extends Shape{
 
     @Override
     public double getArea() {
-        return 0.0;
+        double Area;
+        double pi = 3.1415926;
+        double r_sq = radius^2;
+        return pi * r_sq;
     }
 }
 

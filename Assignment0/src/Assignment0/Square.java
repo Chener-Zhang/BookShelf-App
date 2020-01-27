@@ -10,8 +10,10 @@ package Assignment0;
  * @author tuh12085
  */
 public class Square extends Shape {
-    public void Square(int length, int height){
-        
+    public Square(String name) {
+        super(name);
+
     }
+
     
 }

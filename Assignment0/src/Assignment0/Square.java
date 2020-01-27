@@ -1,8 +1,9 @@
 package Assignment0;
 
 public class Square extends Shape {
-    public Square(String name) {
-        super(name);
+
+    public Square(int length, int height) {
+        super("Square");
 
     }
 

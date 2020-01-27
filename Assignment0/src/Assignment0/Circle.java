@@ -2,9 +2,12 @@ package Assignment0;
 
 
 class Circle extends Shape{
-    public Circle(String name) {
-        super(name);
-    }
+    int radius;
+
+  public Circle(int radius){
+      super("Circle");
+      this.radius = radius;
+  }
 
 
 }

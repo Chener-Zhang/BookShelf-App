@@ -26,7 +26,7 @@ public class Triangle extends Shape{
 
 
     public void printDimensions()
-            
+                
     {
         System.out.println("Triangle");
     }

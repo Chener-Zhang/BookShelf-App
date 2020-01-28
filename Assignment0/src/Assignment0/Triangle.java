@@ -8,7 +8,6 @@ public class Triangle extends Shape{
          double c;
 
 
-
     public Triangle(double x, double y, double z) {
         super("Triangle");
         this.a = x;
@@ -26,9 +25,12 @@ public class Triangle extends Shape{
 
 
     public void printDimensions()
-                
     {
-        System.out.println("Triangle");
+        if (a == b || b == c){
+            Triangle Equal = new EqullateralTriangle(a,b,c);
+        }else{
+            System.out.println("Triangle");
+        }
     }
 
 

@@ -18,7 +18,7 @@ public class EqullateralTriangle extends Triangle {
 
     public void printDimensions()
     {
-        System.out.println("EqullateralTriangle");
+        System.out.println("This is a EqullateralTriangle");
     }
 
 

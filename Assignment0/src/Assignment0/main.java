@@ -3,15 +3,20 @@ package Assignment0;
 public class main {
     public static void main(String[] args){
 
-        Shape item2 = new Triangle(4,5,3);
-        double c=item2.getArea();
-        System.out.println(c);
+        Shape shape_arr[] = new Shape[5];
+        shape_arr[0] = new Square(5,5);
+        shape_arr[1] = new Circle(5.5);
+        shape_arr[2] = new Triangle(3,4,5);
+        shape_arr[3] = new Square(5,5);
+        shape_arr[4] = new Triangle(3,3,3);
 
-        Shape item3 = new Square(4,7);
-        System.out.println(item3.getArea());
 
-        Shape item4 = new Circle(8);
-        System.out.println(item4.getArea());
+        for (int i = 0; i < shape_arr.length;i++){
+            System.out.println("The shape is :" + shape_arr[i].getName());
+            System.out.println("The Area is :" + shape_arr[i].getArea());
+            shape_arr[i].printDimensions();
+            System.out.println();
+        }
 
     }
 }

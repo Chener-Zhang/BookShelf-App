@@ -28,8 +28,9 @@ public class Triangle extends Shape{
     {
         if (a == b || b == c){
             Triangle Equal = new EqullateralTriangle(a,b,c);
+            Equal.printDimensions();
         }else{
-            System.out.println("Triangle");
+            System.out.println("This is a Triangle");
         }
     }
 

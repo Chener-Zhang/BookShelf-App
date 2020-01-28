@@ -2,9 +2,9 @@ package Assignment0;
 
 
 class Circle extends Shape{
-    int radius;
+    double radius;
 
-  public Circle(int radius){
+  public Circle(double radius){
       super("Circle");
       this.radius = radius;
   }
@@ -13,7 +13,7 @@ class Circle extends Shape{
     public double getArea() {
         double Area;
         double pi = 3.1415926;
-        double r_sq = radius^2;
+        double r_sq = radius * radius;
         return pi * r_sq;
     }
 
@@ -22,7 +22,7 @@ class Circle extends Shape{
     public void printDimensions()
 
     {
-        System.out.println("Circle");
+        System.out.println("This is a Circle");
     }
 
 }

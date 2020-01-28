@@ -3,9 +3,9 @@ package Assignment0;
 public class Square extends Shape {
 
 
-    int len;
-    int height;
-    public Square(int length, int height) {
+    double len;
+    double height;
+    public Square(double length, double height) {
         super("Square");
         this.len = length;
         this.height = height;
@@ -13,7 +13,7 @@ public class Square extends Shape {
 
 
     public double getArea() {
-        int Area;
+        double Area;
         Area = len *height;
         return Area;
     }
@@ -21,7 +21,7 @@ public class Square extends Shape {
     public void printDimensions()
 
     {
-        System.out.println("Square");
+        System.out.println("This is a Square");
     }
 
 }

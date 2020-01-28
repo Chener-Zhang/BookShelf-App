@@ -17,5 +17,11 @@ public class Square extends Shape {
         Area = len *height;
         return Area;
     }
-    
+
+    public void printDimensions()
+
+    {
+        System.out.println("Square");
+    }
+
 }

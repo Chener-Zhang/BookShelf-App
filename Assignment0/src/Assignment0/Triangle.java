@@ -6,6 +6,9 @@ public class Triangle extends Shape{
          double a;
          double b;
          double c;
+
+
+
     public Triangle(double x, double y, double z) {
         super("Triangle");
         this.a = x;
@@ -20,4 +23,14 @@ public class Triangle extends Shape{
         double Area= Math.sqrt(x);
         return Area;
     }
+
+
+    public void printDimensions()
+            
+    {
+        System.out.println("Triangle");
+    }
+
+
+
 }

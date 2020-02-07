@@ -2,9 +2,11 @@
     <string name="app_name">SignUpForm</string>
     <string name="password_confirm">Password Confirm</string>
     <string name="password">Password</string>
-    <string name="username">Username</string>
+    <string name="username">name</string>
     <string name="enter_username">Enter Username</string>
     <string name="enter_passwords">Enter passwords</string>
-    <string name="enter_passwords_confim">Enter passwords confim</string>
+    <string name="enter_passwords_confim">Enter passwords again</string>
     <string name="comfirm">Comfirm</string>
+    <string name="email">Email</string>
+    <string name="enter_email">Enter email</string>
 </resources>

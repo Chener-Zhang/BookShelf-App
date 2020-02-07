@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class FormActivity extends AppCompatActivity {
 
+
+    String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,7 @@ public class FormActivity extends AppCompatActivity {
 
 
         String user_enter_name = check_name.getText().toString();
+        this.username = user_enter_name;
         String user_enter_email = check_email.getText().toString();
         String user_enter_password1 = password_1.getText().toString();
         String user_enter_password2 = password_2.getText().toString();
@@ -65,6 +69,7 @@ public class FormActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (check_input() == 1) {
+                    Toast.makeText(FormActivity.this, "Welcome come " + username, Toast.LENGTH_SHORT).show();
                     System.out.println();
                 }
             }

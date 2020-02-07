@@ -1,5 +1,5 @@
 
-# Assigment2 Explanation;
+# Assigment2 Explanation
 
 ### Global Variable
 

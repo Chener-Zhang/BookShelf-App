@@ -63,7 +63,8 @@ public class FormActivity extends AppCompatActivity {
 
     }
 
-    public void save_press() {
+    public void save_press() 
+    {
         Button save_bottom = findViewById(R.id.save_button);
         save_bottom.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ColorAdapter</string>
+    <string-array name="MyColorList">
+        <item>Black</item>
+        <item>Blue</item>
+        <item>Purple</item>
+        <item>Yellow</item>
+    </string-array>
 </resources>

@@ -39,10 +39,45 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         choosen_color = parent.getSelectedItem().toString();
         System.out.println("You select: " + choosen_color);
-        switch (choosen_color) {
-            case "Blue":
-                myLayout.setBackgroundColor(Color.blue(100));
+        if (choosen_color.equals("Choose a Color")) {
+            myLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+
+        } else {
+            switch (choosen_color) {
+                case "Blue":
+                    myLayout.setBackgroundColor(Color.parseColor("#0000ff"));
+                    break;
+
+                case "Purple":
+                    myLayout.setBackgroundColor(Color.parseColor("#6a0dad"));
+                    break;
+                case "green":
+                    myLayout.setBackgroundColor(Color.parseColor("#00ff00"));
+
+                    break;
+                case "cherry":
+                    myLayout.setBackgroundColor(Color.parseColor("#DE3163"));
+                    break;
+                case "rose":
+                    myLayout.setBackgroundColor(Color.parseColor("#ff007f"));
+
+                    break;
+                case "silver":
+                    myLayout.setBackgroundColor(Color.parseColor("#aaa9ad"));
+
+                    break;
+                case "sky":
+                    myLayout.setBackgroundColor(Color.parseColor("#87ceeb"));
+
+                    break;
+                case "pear":
+                    myLayout.setBackgroundColor(Color.parseColor("#d1e231"));
+
+                    break;
+
+            }
         }
+
 
     }
 

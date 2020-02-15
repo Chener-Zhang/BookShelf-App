@@ -51,29 +51,43 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 case "Purple":
                     myLayout.setBackgroundColor(Color.parseColor("#6a0dad"));
                     break;
+
                 case "green":
                     myLayout.setBackgroundColor(Color.parseColor("#00ff00"));
-
                     break;
+
                 case "cherry":
                     myLayout.setBackgroundColor(Color.parseColor("#DE3163"));
                     break;
+
                 case "rose":
                     myLayout.setBackgroundColor(Color.parseColor("#ff007f"));
-
                     break;
+
                 case "silver":
                     myLayout.setBackgroundColor(Color.parseColor("#aaa9ad"));
-
                     break;
+
                 case "sky":
                     myLayout.setBackgroundColor(Color.parseColor("#87ceeb"));
-
                     break;
+
                 case "pear":
                     myLayout.setBackgroundColor(Color.parseColor("#d1e231"));
-
                     break;
+
+                case "candy":
+                    myLayout.setBackgroundColor(Color.parseColor("#ff0800"));
+                    break;
+
+                case "cerulean":
+                    myLayout.setBackgroundColor(Color.parseColor("#007ba7"));
+                    break;
+
+                case "banana":
+                    myLayout.setBackgroundColor(Color.parseColor("#ffe135"));
+                    break;
+
 
             }
         }

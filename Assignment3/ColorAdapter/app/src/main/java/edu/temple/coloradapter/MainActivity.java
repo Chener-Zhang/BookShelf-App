@@ -15,14 +15,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Spinner myspinner;
     String choosen_color;
     ConstraintLayout myLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        Spinner spinner = findViewById(R.id.myspinner);
-        myspinner = spinner;
+        myspinner = findViewById(R.id.myspinner);
         setup();
     }
 

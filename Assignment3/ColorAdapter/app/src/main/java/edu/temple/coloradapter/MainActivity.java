@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner myspinner;
+    String choosen_color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,21 +22,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Spinner spinner = findViewById(R.id.myspinner);
         myspinner = spinner;
         setup();
-
     }
 
     public void setup() {
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.MyColorList));
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        myspinner.setAdapter(arrayAdapter);
+        ArrayAdapter<String> ColorAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.MyColorList));
+        ColorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        myspinner.setAdapter(ColorAdapter);
         myspinner.setOnItemSelectedListener(this);
-
-
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        System.out.println("You select: " + parent.getSelectedItem().toString());
     }
 
     @Override

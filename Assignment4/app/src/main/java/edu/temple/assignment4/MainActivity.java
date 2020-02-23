@@ -80,8 +80,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Intent action = new Intent(this,Canvas.class);
-            action.putExtra("color",current_selection);
+            String choosen = parent.getSelectedItem().toString();
+            if(choosen.equals("Choose a Color")){
+
+            }else{
+                Intent action = new Intent(this,Canvas.class);
+                action.putExtra("color",choosen);
+                action.putExtra("color_id",current_selection);
+                startActivity(action);
+            }
+
         }
 
     @Override

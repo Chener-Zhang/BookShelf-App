@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-    public void color_name_list(){
-        String[] mylist= {"#0000ff","#6a0dad","#00ff00","#DE3163","#ff007f","#aaa9ad","#87ceeb","#d1e231","#ff0800","#6a0dad","#007ba7","#ffe135"};
+    public void color_name_list() {
+        String[] mylist = {"#0000ff", "#6a0dad", "#00ff00", "#DE3163", "#ff007f", "#aaa9ad", "#87ceeb", "#d1e231", "#ff0800", "#6a0dad", "#007ba7", "#ffe135"};
         this.mylist = mylist;
     }
 
@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 TextView ItemView = (TextView) view;
                 view.setId(position);
 
-                for (int i = 0; i < mylist.length;i++){
-                    if(position == i){
+                for (int i = 0; i < mylist.length; i++) {
+                    if (position == i) {
                         current_selection = mylist[i];
                         ItemView.setBackgroundColor(Color.parseColor(mylist[i]));
                     }
@@ -73,24 +73,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         myspinner.setOnItemSelectedListener(this);
 
 
-
         return 0;
     }
 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String choosen = parent.getSelectedItem().toString();
-            if(choosen.equals("Choose a Color")){
+        String choosen = parent.getSelectedItem().toString();
+        if (choosen.equals("Choose a Color")) {
 
-            }else{
-                Intent action = new Intent(this,Canvas.class);
-                action.putExtra("color",choosen);
-                action.putExtra("color_id",current_selection);
-                startActivity(action);
-            }
-
+        } else {
+            Intent action = new Intent(this, Canvas.class);
+            action.putExtra("color", choosen);
+            action.putExtra("color_id", current_selection);
+            startActivity(action);
         }
+
+    }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

@@ -3,6 +3,7 @@ package edu.temple.assignment4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,11 +18,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     Spinner myspinner;
+    String current_selection;
+    String[] mylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        color_name_list();
         color_init();
         spiiner_setup();
         adaptor_setup();
@@ -39,6 +43,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return 1;
     }
 
+
+    public void color_name_list(){
+        String[] mylist= {"#0000ff","#6a0dad","#00ff00","#DE3163","#ff007f","#aaa9ad","#87ceeb","#d1e231","#ff0800","#6a0dad","#007ba7","#ffe135"};
+        this.mylist = mylist;
+    }
+
     public int adaptor_setup() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.mycolor)) {
             public View getDropDownView(int position, View convertView,
@@ -47,52 +57,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 TextView ItemView = (TextView) view;
                 view.setId(position);
 
-                switch (position){
-
-                    case 1:
-                        ItemView.setBackgroundColor(Color.parseColor("#0000ff"));
-                        break;
-
-                    case 2:
-                        ItemView.setBackgroundColor(Color.parseColor("#6a0dad"));
-                        break;
-
-                    case 3:
-                        ItemView.setBackgroundColor(Color.parseColor("#00ff00"));
-                        break;
-
-                    case 4:
-                        ItemView.setBackgroundColor(Color.parseColor("#DE3163"));
-                        break;
-
-                    case 5:
-                        ItemView.setBackgroundColor(Color.parseColor("#ff007f"));
-                        break;
-
-                    case 6:
-                        ItemView.setBackgroundColor(Color.parseColor("#aaa9ad"));
-                        break;
-
-                    case 7:
-                        ItemView.setBackgroundColor(Color.parseColor("#87ceeb"));
-                        break;
-
-                    case 8:
-                        ItemView.setBackgroundColor(Color.parseColor("#d1e231"));
-                        break;
-
-                    case 9:
-                        ItemView.setBackgroundColor(Color.parseColor("#ff0800"));
-                        break;
-
-                    case 10:
-                        ItemView.setBackgroundColor(Color.parseColor("#007ba7"));
-                        break;
-
-                    case 11:
-                        ItemView.setBackgroundColor(Color.parseColor("#ffe135"));
-                        break;
+                for (int i = 0; i < mylist.length;i++){
+                    if(position == i){
+                        current_selection = mylist[i];
+                        ItemView.setBackgroundColor(Color.parseColor(mylist[i]));
+                    }
                 }
+
 
                 return view;
             }
@@ -102,13 +73,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         myspinner.setOnItemSelectedListener(this);
 
 
+
         return 0;
     }
 
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
+            Intent action = new Intent(this,Canvas.class);
+            action.putExtra("color",current_selection);
+        }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

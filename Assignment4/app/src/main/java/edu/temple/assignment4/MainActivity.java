@@ -2,9 +2,7 @@ package edu.temple.assignment4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -26,26 +24,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         color_name_list();
-        color_init();
-        spiiner_setup();
+        spinner_setup();
         adaptor_setup();
     }
 
-    public int color_init() {
-        Resources res = getResources();
-        String[] myarr = res.getStringArray(R.array.mycolor);
-        int size = myarr.length;
-        return 1;
-    }
 
-    public int spiiner_setup() {
+
+    public int spinner_setup() {
         myspinner = findViewById(R.id.my_spinner);
         return 1;
     }
 
 
     public void color_name_list() {
-        String[] mylist = {"#0000ff", "#6a0dad", "#00ff00", "#DE3163", "#ff007f", "#aaa9ad", "#87ceeb", "#d1e231", "#ff0800", "#6a0dad", "#007ba7", "#ffe135"};
+        String[] mylist = {"#ffffff","#0000FF","#FFFF00","#008000","#FF0000"};
         this.mylist = mylist;
     }
 
@@ -56,14 +48,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 View view = super.getDropDownView(position, convertView, parent);
                 TextView ItemView = (TextView) view;
                 view.setId(position);
-
                 for (int i = 0; i < mylist.length; i++) {
                     if (position == i) {
-                        current_selection = mylist[i];
+
                         ItemView.setBackgroundColor(Color.parseColor(mylist[i]));
                     }
                 }
-
 
                 return view;
             }
@@ -85,7 +75,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         } else {
             Intent action = new Intent(this, Canvas.class);
             action.putExtra("color", choosen);
-            action.putExtra("color_id", current_selection);
+
+
             startActivity(action);
         }
 

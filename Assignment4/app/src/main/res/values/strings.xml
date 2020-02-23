@@ -3,17 +3,10 @@
     <string name="textview">TextView</string>
     <string-array name="mycolor">
         <item>Choose a Color</item>
-        <item>Blue</item>
-        <item>Purple</item>
-        <item>cherry</item>
-        <item>rose</item>
-        <item>silver</item>
-        <item>green</item>
-        <item>sky</item>
-        <item>pear</item>
-        <item>candy</item>
-        <item>cerulean</item>
-        <item>banana</item>
+        <item>BLUE</item>
+        <item>YELLOW</item>
+        <item>GREEN</item>
+        <item>RED</item>
 
     </string-array>
 </resources>

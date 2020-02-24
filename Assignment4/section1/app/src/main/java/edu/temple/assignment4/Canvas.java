@@ -12,7 +12,9 @@ public class Canvas extends AppCompatActivity {
 
 
     String getcolor;
-    String color_id;
+    int getcolor_index;
+    String[] list;
+
     TextView box;
 
 
@@ -23,11 +25,19 @@ public class Canvas extends AppCompatActivity {
         box = (TextView) findViewById(R.id.color_text_view);
 
         getcolor = getIntent().getExtras().getString("color");
-
-
+        getcolor_index = getIntent().getExtras().getInt("color_index");
+        list = getIntent().getExtras().getStringArray("list");
         box.setText(getcolor);
+
+        System.out.println("-----------");
+        System.out.println("index: "+ getcolor_index);
+        System.out.println(list[getcolor_index]);
+        System.out.println(getcolor);
+        System.out.println("-----------");
+
+
         ConstraintLayout canvas = (ConstraintLayout) findViewById(R.id.canvas_layout);
-        canvas.setBackgroundColor(Color.parseColor(getcolor));
+        canvas.setBackgroundColor(Color.parseColor(list[getcolor_index]));
     }
 
 }

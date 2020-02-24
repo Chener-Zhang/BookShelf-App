@@ -7,6 +7,14 @@
         <item>YELLOW</item>
         <item>GREEN</item>
         <item>RED</item>
+        <item>Ivory</item>
+        <item>LightSalmon</item>
+        <item>Tomato</item>
+        <item>DarkOrange</item>
+        <item>Coral</item>
+        <item>HotPink</item>
+
+
 
     </string-array>
 </resources>

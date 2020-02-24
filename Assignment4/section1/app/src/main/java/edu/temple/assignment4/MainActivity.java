@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     Spinner myspinner;
-    String current_selection;
     String[] mylist;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-
     public int spinner_setup() {
         myspinner = findViewById(R.id.my_spinner);
         return 1;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     public void color_name_list() {
-        String[] mylist = {"#ffffff","#0000FF","#FFFF00","#008000","#FF0000"};
+        String[] mylist = {"#ffffff", "#0000FF", "#FFFF00", "#008000", "#FF0000", "#FFFFF0", "#FFA07A", "#FF6347", "#FF8C00", "#FF7F50", "#FF69B4"};
         this.mylist = mylist;
     }
 
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 view.setId(position);
                 for (int i = 0; i < mylist.length; i++) {
                     if (position == i) {
-
                         ItemView.setBackgroundColor(Color.parseColor(mylist[i]));
                     }
                 }
@@ -70,15 +68,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String choosen = parent.getSelectedItem().toString();
+
+        for (int i = 0; i < parent.getCount(); i++) {
+            if (parent.getItemAtPosition(i).equals("Choose a Color")) {
+
+            } else if (parent.getItemAtPosition(i).equals(choosen)) {
+
+                System.out.println("mycolor choosen : " + choosen);
+                System.out.println("mycolor position: " + parent.getItemAtPosition(i));
+                System.out.println("color_index" + i);
+
+                Intent action = new Intent(this, Canvas.class);
+                action.putExtra("color_index", i);
+                action.putExtra("color", choosen);
+                action.putExtra("list", mylist);
+                startActivity(action);
+
+            }
+        }
+        /*
         if (choosen.equals("Choose a Color")) {
 
         } else {
             Intent action = new Intent(this, Canvas.class);
             action.putExtra("color", choosen);
 
-
             startActivity(action);
-        }
+        }*/
 
     }
 

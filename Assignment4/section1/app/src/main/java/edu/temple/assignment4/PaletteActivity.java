@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class PaletteActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
     Spinner myspinner;
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 System.out.println("mycolor position: " + parent.getItemAtPosition(i));
                 System.out.println("color_index" + i);
 
-                Intent action = new Intent(this, Canvas.class);
+                Intent action = new Intent(this, CanvasActivitiy.class);
                 action.putExtra("color_index", i);
                 action.putExtra("color", choosen);
                 action.putExtra("list", mylist);
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (choosen.equals("Choose a Color")) {
 
         } else {
-            Intent action = new Intent(this, Canvas.class);
+            Intent action = new Intent(this, CanvasActivitiy.class);
             action.putExtra("color", choosen);
 
             startActivity(action);

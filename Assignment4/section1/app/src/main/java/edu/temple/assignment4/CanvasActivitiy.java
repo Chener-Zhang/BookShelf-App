@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.widget.TextView;
 
-public class Canvas extends AppCompatActivity {
+public class CanvasActivitiy extends AppCompatActivity {
 
 
     String getcolor;

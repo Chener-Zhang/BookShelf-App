@@ -10,44 +10,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c664a59f-1b9e-416a-bcc9-e6f93b81aca9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/edu/temple/coloradapter/ExampleInstrumentedTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/temple/coloradapter/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/edu/temple/coloradapter/ExampleUnitTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/androidTest/java/edu/temple/assignment4/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/java/edu/temple/assignment4/Canvas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/java/edu/temple/assignment4/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/layout/activity_canvas.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/app/src/test/java/edu/temple/assignment4/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/release/app-release.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/release/output.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Assignment4/settings.gradle" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -70,7 +75,7 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -97,21 +102,36 @@
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ColorAdapter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ColorAdapter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ColorAdapter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ColorAdapter" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Assignment4/section1" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -367,7 +387,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info id="Project" order="1" visible="true" weight="0.19722815" />
+      <window_info active="true" id="Project" order="1" visible="true" weight="0.19704953" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -414,63 +434,12 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="41" lean-forward="true" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/edu/temple/coloradapter/ExampleInstrumentedTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/test/java/edu/temple/coloradapter/ExampleUnitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="26" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="26" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/temple/coloradapter/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="68" column="26" lean-forward="true" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#725#733#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+    <entry file="file://$PROJECT_DIR$/app/build.gradle" />
+    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/edu/temple/coloradapter/ExampleInstrumentedTest.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/test/java/edu/temple/coloradapter/ExampleUnitTest.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/edu/temple/coloradapter/MainActivity.java" />
   </component>
 </project>

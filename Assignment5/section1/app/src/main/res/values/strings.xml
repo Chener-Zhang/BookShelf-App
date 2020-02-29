@@ -3,7 +3,7 @@
     <string name="textview">TextView</string>
     <string name="english">English</string>
     <string name="spanish">Spanish</string>
-    <string-array name="mycolor">
+    <string-array name="mycolor_in_english">
         <item>Choose a Color</item>
         <item>BLUE</item>
         <item>YELLOW</item>

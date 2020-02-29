@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,12 +19,20 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
     Spinner myspinner;
     String[] mylist;
     String[] color_hex;
+    String current_language;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+        init();
 
+    }
+
+
+    public void init(){
         get_color_hex();
         color_name_list();
         spinner_setup();
@@ -47,7 +56,12 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public int adaptor_setup() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.mycolor)) {
+
+        Button english_button = (Button)findViewById(R.id.English_language_buttom);
+        Button spanish_button = (Button)findViewById(R.id.Spanish_language_buttom);
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.mycolor_in_english)) {
             public View getDropDownView(int position, View convertView,
                                         ViewGroup parent) {
                 View view = super.getDropDownView(position, convertView, parent);
@@ -65,7 +79,6 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         myspinner.setAdapter(adapter);
         myspinner.setOnItemSelectedListener(this);
-
 
         return 0;
     }

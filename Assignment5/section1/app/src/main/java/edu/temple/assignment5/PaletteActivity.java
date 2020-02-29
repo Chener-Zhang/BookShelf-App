@@ -19,7 +19,7 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
     Spinner myspinner;
     String[] mylist;
     String[] color_hex;
-    String current_language;
+    String current_language = "english";
 
 
     @Override
@@ -27,16 +27,42 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main);
-        init();
+
+        get_color_hex();
+
+        Button english_button = findViewById(R.id.English_language_buttom);
+        english_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                current_language = "english";
+                init();
+            }
+        });
+
+        Button spanish_button = findViewById(R.id.Spanish_language_buttom);
+        spanish_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                current_language = "spanish";
+                init();
+            }
+        });
+
 
     }
 
 
-    public void init(){
-        get_color_hex();
+    public void init() {
+
         color_name_list();
+        System.out.println("name setup success");
+
         spinner_setup();
+        System.out.println("spinner setup success");
+
         adaptor_setup();
+        System.out.println("adaptor setup success");
+
     }
 
 
@@ -45,7 +71,7 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
         return 1;
     }
 
-    public void get_color_hex(){
+    public void get_color_hex() {
         color_hex = getResources().getStringArray(R.array.color_in_hex);
 
     }
@@ -56,29 +82,47 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public int adaptor_setup() {
-
-        Button english_button = (Button)findViewById(R.id.English_language_buttom);
-        Button spanish_button = (Button)findViewById(R.id.Spanish_language_buttom);
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.mycolor_in_english)) {
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView ItemView = (TextView) view;
-                view.setId(position);
-                for (int i = 0; i < mylist.length; i++) {
-                    if (position == i) {
-                        ItemView.setBackgroundColor(Color.parseColor(mylist[i]));
+        System.out.println("the current language is " + current_language);
+        if (current_language.equals("spanish")) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.mycolor_in_spanish)) {
+                public View getDropDownView(int position, View convertView,
+                                            ViewGroup parent) {
+                    View view = super.getDropDownView(position, convertView, parent);
+                    TextView ItemView = (TextView) view;
+                    view.setId(position);
+                    for (int i = 0; i < mylist.length; i++) {
+                        if (position == i) {
+                            ItemView.setBackgroundColor(Color.parseColor(mylist[i]));
+                        }
                     }
-                }
 
-                return view;
-            }
-        };
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        myspinner.setAdapter(adapter);
-        myspinner.setOnItemSelectedListener(this);
+                    return view;
+                }
+            };
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            myspinner.setAdapter(adapter);
+            myspinner.setOnItemSelectedListener(this);
+        } else {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.mycolor_in_english)) {
+                public View getDropDownView(int position, View convertView,
+                                            ViewGroup parent) {
+                    View view = super.getDropDownView(position, convertView, parent);
+                    TextView ItemView = (TextView) view;
+                    view.setId(position);
+                    for (int i = 0; i < mylist.length; i++) {
+                        if (position == i) {
+                            ItemView.setBackgroundColor(Color.parseColor(mylist[i]));
+                        }
+                    }
+
+                    return view;
+                }
+            };
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            myspinner.setAdapter(adapter);
+            myspinner.setOnItemSelectedListener(this);
+        }
+
 
         return 0;
     }

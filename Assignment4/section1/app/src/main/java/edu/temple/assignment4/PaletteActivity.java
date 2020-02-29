@@ -2,6 +2,7 @@ package edu.temple.assignment4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,12 +18,14 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
 
     Spinner myspinner;
     String[] mylist;
-
+    String[] color_hex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        get_color_hex();
         color_name_list();
         spinner_setup();
         adaptor_setup();
@@ -34,9 +37,13 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
         return 1;
     }
 
+    public void get_color_hex(){
+        color_hex = getResources().getStringArray(R.array.color_in_hex);
+
+    }
 
     public void color_name_list() {
-        String[] mylist = {"#ffffff", "#0000FF", "#FFFF00", "#008000", "#FF0000", "#FFFFF0", "#FFA07A", "#FF6347", "#FF8C00", "#FF7F50", "#FF69B4"};
+        String[] mylist = color_hex;
         this.mylist = mylist;
     }
 

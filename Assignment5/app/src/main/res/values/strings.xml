@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Assignment4</string>
+    <string name="textview">TextView</string>
+    <string-array name="mycolor">
+        <item>Choose a Color</item>
+        <item>BLUE</item>
+        <item>YELLOW</item>
+        <item>GREEN</item>
+        <item>RED</item>
+        <item>Ivory</item>
+        <item>LightSalmon</item>
+        <item>Tomato</item>
+        <item>DarkOrange</item>
+        <item>Coral</item>
+        <item>HotPink</item>
+    </string-array>
+
+    <string-array name = "color_in_hex">
+        <item>#ffffff</item>
+        <item>#0000FF</item>
+        <item>#FFFF00</item>
+        <item>#008000</item>
+        <item>#FF0000</item>
+        <item>#FFFFF0</item>
+        <item>#FFA07A</item>
+        <item>#FF6347</item>
+        <item>#FF8C00</item>
+        <item>#FF7F50</item>
+        <item>#FF69B4</item>
+    </string-array>
+
+    <string-array name="mycolor_in_spanish">
+        <item>Elige un color</item>
+        <item>AZUL</item>
+        <item>AMARILLA</item>
+        <item>VERDE</item>
+        <item>ROJA</item>
+        <item>Marfil</item>
+        <item>LightSalmon</item>
+        <item>Tomate</item>
+        <item>DarkOrange</item>
+        <item>Coral</item>
+        <item>Rosa caliente</item>
+    </string-array>
+</resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.temple.assignment4">
+    package="edu.temple.assignment5">
 
     <application
         android:allowBackup="true"
@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CanvasActivitiy"></activity>
-        <activity android:name=".PaletteActivity">
+        <activity android:name="edu.temple.assignment5.CanvasActivitiy"></activity>
+        <activity android:name="edu.temple.assignment5.PaletteActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

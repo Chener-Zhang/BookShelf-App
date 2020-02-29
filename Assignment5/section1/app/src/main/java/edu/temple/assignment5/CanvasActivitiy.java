@@ -1,11 +1,10 @@
-package edu.temple.assignment4;
+package edu.temple.assignment5;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.widget.TextView;
 
 public class CanvasActivitiy extends AppCompatActivity {

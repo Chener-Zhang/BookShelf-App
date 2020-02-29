@@ -1,8 +1,7 @@
-package edu.temple.assignment4;
+package edu.temple.assignment5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Assignment4</string>
     <string name="textview">TextView</string>
+    <string name="english">English</string>
+    <string name="spanish">Spanish</string>
     <string-array name="mycolor">
         <item>Choose a Color</item>
         <item>BLUE</item>

@@ -133,8 +133,9 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
         String choosen = parent.getSelectedItem().toString();
 
         for (int i = 0; i < parent.getCount(); i++) {
-            if (parent.getItemAtPosition(i).equals("Choose a Color")) {
-
+            //parent.getItemAtPosition(i).equals("Choose a Color");
+            if (i == 0) {
+            // do nothing
             } else if (parent.getItemAtPosition(i).equals(choosen)) {
 
                 System.out.println("mycolor choosen : " + choosen);

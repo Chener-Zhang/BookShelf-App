@@ -86,15 +86,7 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
 
             }
         }
-        /*
-        if (choosen.equals("Choose a Color")) {
 
-        } else {
-            Intent action = new Intent(this, CanvasActivitiy.class);
-            action.putExtra("color", choosen);
-
-            startActivity(action);
-        }*/
 
     }
 

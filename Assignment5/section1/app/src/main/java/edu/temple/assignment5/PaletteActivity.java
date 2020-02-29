@@ -21,7 +21,6 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
     String[] color_hex;
     String current_language = "english";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,24 +46,17 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
                 init();
             }
         });
-
-
     }
 
-
     public void init() {
-
         color_name_list();
         System.out.println("name setup success");
-
         spinner_setup();
         System.out.println("spinner setup success");
-
         adaptor_setup();
         System.out.println("adaptor setup success");
 
     }
-
 
     public int spinner_setup() {
         myspinner = findViewById(R.id.my_spinner);

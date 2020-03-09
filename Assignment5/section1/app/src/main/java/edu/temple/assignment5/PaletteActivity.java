@@ -9,9 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 public class PaletteActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -29,23 +30,15 @@ public class PaletteActivity extends AppCompatActivity implements AdapterView.On
 
         get_color_hex();
 
-        Button english_button = findViewById(R.id.English_language_buttom);
-        english_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                current_language = "english";
-                init();
-            }
-        });
+        if(Locale.getDefault().getLanguage().equals("es")){
+            current_language = "spanish";
+            init();
+        }else if(Locale.getDefault().getLanguage().equals("en")){
+            current_language = "english";
+            init();
+        }
 
-        Button spanish_button = findViewById(R.id.Spanish_language_buttom);
-        spanish_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                current_language = "spanish";
-                init();
-            }
-        });
+
     }
 
     public void init() {

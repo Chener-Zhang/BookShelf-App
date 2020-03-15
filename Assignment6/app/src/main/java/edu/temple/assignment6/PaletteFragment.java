@@ -33,19 +33,13 @@ public class PaletteFragment extends Fragment implements AdapterView.OnItemSelec
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         View view = inflater.inflate(R.layout.fragment_palette, container, false);
         MYVIEW = view;
-        //map set-up
         map_setup();
-
-        //spinner set-up
         setup_spinner_adaptor();
         MY_SPINNER.setOnItemSelectedListener(this);
-        //spinner set-up finished
-
         return view;
-
-
     }
 
     public void map_setup() {

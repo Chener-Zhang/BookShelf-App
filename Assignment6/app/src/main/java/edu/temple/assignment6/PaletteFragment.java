@@ -82,6 +82,12 @@ public class PaletteFragment extends Fragment implements AdapterView.OnItemSelec
 
         if (MY_COLOR_MAP.get(choosen) != null) {
 
+            Bundle bundle = new Bundle();
+            CanvasFragment canvasFragment = new CanvasFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            bundle.putString("color",choosen);
+            canvasFragment.setArguments(bundle);
+            fragmentManager.beginTransaction().replace(R.id.CanvasFragment,canvasFragment).commit();
 
         }
 

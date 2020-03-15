@@ -7,6 +7,7 @@
     <string name="canvas">Canvas</string>
 
     <string-array name= "color_list">
+        <item>Choose a color</item>
         <item>RED</item>
         <item>BLUE</item>
         <item>YELLOW</item>
@@ -18,6 +19,7 @@
     </string-array>
 
     <string-array name="color_hex">
+        <item>#FFFFFF</item>
         <item>#FF0000</item>
         <item>#0000FF</item>
         <item>#FFFF00</item>

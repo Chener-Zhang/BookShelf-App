@@ -3,6 +3,8 @@ package edu.temple.assignment6;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.FontRequest;
 import android.view.LayoutInflater;
@@ -77,14 +79,9 @@ public class PaletteFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String choosen = parent.getSelectedItem().toString();
+
         if (MY_COLOR_MAP.get(choosen) != null) {
 
-            System.out.println(choosen);
-            //System.out.println("you have this color");
-            CanvasFragment fragment = new CanvasFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("CURRENT_SELECTED_COLLOR", choosen);
-            fragment.setArguments(bundle);
 
         }
 

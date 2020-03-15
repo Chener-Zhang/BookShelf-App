@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,28 +27,28 @@ public class PaletteFragment extends Fragment implements AdapterView.OnItemSelec
     Map MY_COLOR_MAP;
     int LENGTH_OF_COLOR;
 
-   public PaletteFragment() {
 
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_palette, container, false);
         MYVIEW = view;
-
         //map set-up
         map_setup();
+
         //spinner set-up
         setup_spinner_adaptor();
         MY_SPINNER.setOnItemSelectedListener(this);
         //spinner set-up finished
 
-
         return view;
+
+
     }
 
-    public void map_setup(){
+    public void map_setup() {
         //Get the list
         MYCOLORLIST = getResources().getStringArray(R.array.color_list);
         MYCOLORLIST_HEX = getResources().getStringArray(R.array.color_hex);
@@ -59,7 +58,7 @@ public class PaletteFragment extends Fragment implements AdapterView.OnItemSelec
         int len = MYCOLORLIST.length;
         LENGTH_OF_COLOR = len;
         for (int i = 0; i < len; i++) {
-        Color_map.put(MYCOLORLIST[i], MYCOLORLIST_HEX[i]);
+            Color_map.put(MYCOLORLIST[i], MYCOLORLIST_HEX[i]);
         }
         MY_COLOR_MAP = Color_map;
     }
@@ -84,10 +83,15 @@ public class PaletteFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String choosen = parent.getSelectedItem().toString();
-        if(MY_COLOR_MAP.get(choosen)!=null){
+        if (MY_COLOR_MAP.get(choosen) != null) {
+
             System.out.println(choosen);
-            System.out.println("you have this color");
-            
+            //System.out.println("you have this color");
+            CanvasFragment fragment = new CanvasFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("CURRENT_SELECTED_COLLOR", choosen);
+            fragment.setArguments(bundle);
+
         }
 
     }

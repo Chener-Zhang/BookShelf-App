@@ -14,8 +14,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //------------------------>
 
-        //PaletteFragment Paletter_Fragment = new PaletteFragment();
-        //Bundle sender = new Bundle();
 
     }
 

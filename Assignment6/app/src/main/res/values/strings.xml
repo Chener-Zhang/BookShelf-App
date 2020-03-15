@@ -7,9 +7,25 @@
     <string name="canvas">Canvas</string>
 
     <string-array name= "color_list">
-        <item>red</item>
-        <item>blue</item>
+        <item>RED</item>
+        <item>BLUE</item>
+        <item>YELLOW</item>
+        <item>SILVER</item>
+        <item>MAROON</item>
+        <item>LIME</item>
+        <item>AQUA</item>
+        <item>PURPLE</item>
     </string-array>
 
+    <string-array name="color_hex">
+        <item>#FF0000</item>
+        <item>#0000FF</item>
+        <item>#FFFF00</item>
+        <item>#C0C0C0</item>
+        <item>#800000</item>
+        <item>#00FF00</item>
+        <item>#00FFFF</item>
+        <item>#800080</item>
+    </string-array>
 
 </resources>

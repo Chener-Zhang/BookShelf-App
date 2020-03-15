@@ -3,6 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="palette_fragment">Palette Fragment</string>
+    <string name="canvas">Canvas</string>
 
     <string-array name= "color_list">
         <item>red</item>

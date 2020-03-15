@@ -7,14 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 
-public class PaletteFragment extends Fragment {
+public class PaletteFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
 
     View myview;
+    Spinner My_Spinner;
     public PaletteFragment(){
 
     }
@@ -25,11 +27,14 @@ public class PaletteFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_palette, container, false);
         myview = view;
         setup_spinner_adaptor();
+        My_Spinner.setOnItemSelectedListener(this);
+
         return view;
     }
 
-    public void setup_spinner_adaptor() {
 
+
+    public void setup_spinner_adaptor() {
         //get the spinner from the PaletteFtagment
         Spinner myspinner = (Spinner) myview.findViewById(R.id.palette_spinner);
         //Create a color_list import from Resourse color
@@ -40,7 +45,19 @@ public class PaletteFragment extends Fragment {
 
         //Connect the spinner with my adapter
         myspinner.setAdapter(ColorAdapter);
+        My_Spinner = myspinner;
+
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String choosen = parent.getSelectedItem().toString();
+        System.out.println(choosen);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Assignment6</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="palette_fragment">Palette Fragment</string>
+    <string name="canvas">Canvas</string>
+
+    <string-array name= "color_list">
+        <item>Choose a color</item>
+        <item>RED</item>
+        <item>BLUE</item>
+        <item>YELLOW</item>
+        <item>SILVER</item>
+        <item>MAROON</item>
+        <item>LIME</item>
+        <item>AQUA</item>
+        <item>PURPLE</item>
+    </string-array>
+
+    <string-array name="color_hex">
+        <item>#FFFFFF</item>
+        <item>#FF0000</item>
+        <item>#0000FF</item>
+        <item>#FFFF00</item>
+        <item>#C0C0C0</item>
+        <item>#800000</item>
+        <item>#00FF00</item>
+        <item>#00FFFF</item>
+        <item>#800080</item>
+    </string-array>
+
 </resources>

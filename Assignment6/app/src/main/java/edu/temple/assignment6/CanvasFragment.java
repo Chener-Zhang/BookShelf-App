@@ -33,7 +33,7 @@ public class CanvasFragment extends Fragment {
             String hex = (String) MY_COLOR_MAP.get(color);
             myview.setBackgroundColor(Color.parseColor(hex));
 
-            
+
         }else{
             System.out.println("there is nothing");
         }

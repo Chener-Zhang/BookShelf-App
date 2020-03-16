@@ -20,13 +20,26 @@ public class CanvasFragment extends Fragment {
     private int LENGTH_OF_COLOR;
     private Map MY_COLOR_MAP;
 
+
+
+    public static CanvasFragment newInstance(String color, String color_hex){
+        CanvasFragment canvasFragment  = new CanvasFragment();
+        Bundle binder = new Bundle();
+        binder.putString("color",color);
+        binder.putString("color_hex",color_hex);
+        canvasFragment.setArguments(binder);
+        return canvasFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View myview = inflater.inflate(R.layout.fragment_canvas, container, false);
         map_setup();
+
         Bundle bundle = getArguments();
+
         if(bundle!=null){
             String color = bundle.getString("color");
             System.out.println("i received " + color);
@@ -37,6 +50,8 @@ public class CanvasFragment extends Fragment {
         }else{
             System.out.println("there is nothing");
         }
+
+
         return myview;
     }
 

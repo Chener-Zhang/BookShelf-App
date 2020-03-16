@@ -20,7 +20,6 @@ public class CanvasFragment extends Fragment {
     private int LENGTH_OF_COLOR;
     private Map MY_COLOR_MAP;
 
-    private CanvasFragment currentFragment;
 
 
     public static CanvasFragment newInstance(String color, String color_hex){
@@ -40,7 +39,7 @@ public class CanvasFragment extends Fragment {
         map_setup();
 
         Bundle bundle = getArguments();
-        
+
         if(bundle!=null){
             String color = bundle.getString("color");
             System.out.println("i received " + color);

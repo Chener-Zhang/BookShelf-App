@@ -1,18 +1,22 @@
 package edu.temple.assignment6;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.provider.FontRequest;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,18 +67,34 @@ public class PaletteFragment extends Fragment implements AdapterView.OnItemSelec
 
     public void setup_spinner_adaptor() {
         //get the spinner from the PaletteFtagment
-        Spinner myspinner = (Spinner) MYVIEW.findViewById(R.id.palette_spinner);
+        final Spinner myspinner = (Spinner) MYVIEW.findViewById(R.id.palette_spinner);
 
         //Create a color_list import from Resourse color
         String[] color_list = getResources().getStringArray(R.array.color_list);
 
         //Making an adapter
-        ArrayAdapter<String> ColorAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, color_list);
+        ArrayAdapter<String> ColorAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, color_list){
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView ItemView = (TextView) view;
+                view.setId(position);
+                for (int i = 0; i < LENGTH_OF_COLOR; i++) {
+                    if (position == i) {
+                        String[] hex = getResources().getStringArray(R.array.color_hex);
+                        ItemView.setBackgroundColor(Color.parseColor(hex[i]));
+                    }
+                }
 
+                return view;
+            }
+        };
         //Connect the spinner with my adapter
         myspinner.setAdapter(ColorAdapter);
+
         MY_SPINNER = myspinner;
     }
+
 
 
     @Override
@@ -95,4 +115,6 @@ public class PaletteFragment extends Fragment implements AdapterView.OnItemSelec
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }

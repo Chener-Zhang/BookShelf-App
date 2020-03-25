@@ -32,7 +32,6 @@ public class BookListFragment extends Fragment {
         my_library = new MyLibrary(getActivity());
         my_library.init();
         //finished init lib
-
         this.view = view;
         list_view_adaptor();
         return view;

@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">Assignment7</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="book_name">
+        <item>The Silent Patient</item>
+        <item>All Quiet on the Western Front</item>
+        <item>Daisy Jones and The Six</item>
+        <item>The Testaments</item>
+        <item>City of Girls</item>
+    </string-array>
+
+    <string-array name="book_author">
+        <item>Alex Michaelides </item>
+        <item>Erich Maria Remarque</item>
+        <item>Taylor Jenkins Reid</item>
+        <item>Margaret Atwood</item>
+        <item>Elizabeth Gilbert</item>
+    </string-array>
 </resources>

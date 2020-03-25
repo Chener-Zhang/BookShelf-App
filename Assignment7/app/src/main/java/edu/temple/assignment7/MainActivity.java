@@ -20,5 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void testing() {
         MyLibrary lib = new MyLibrary(this);
+        lib.init();
     }
 }

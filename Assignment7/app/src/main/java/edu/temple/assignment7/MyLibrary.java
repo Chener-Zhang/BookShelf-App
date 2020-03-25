@@ -1,6 +1,7 @@
 package edu.temple.assignment7;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import java.util.HashMap;
 
@@ -19,12 +20,25 @@ public class MyLibrary {
 
     //init the map
     public void init() {
-        int number_of_books = context.getResources().getStringArray(R.array.book_name).length;
-
+        Resources res = context.getResources();
+        int number_of_books = res.getStringArray(R.array.book_name).length;
+        System.out.println("the numbers of the book are: " + number_of_books);
+        for (int i = 0; i < number_of_books; i++) {
+            String book_name = res.getStringArray(R.array.book_name)[i];
+            String book_author = res.getStringArray(R.array.book_author)[i];
+            library_map.put(book_name, book_author);
+        }
     }
+
+
+    //print the library --> hash_map
+    public void printLibrary() {
+        System.out.println(library_map.toString());
+    }
+
     //return the # of book
     public int getNumber_Book() {
-        return 0;
+        return library_map.size();
     }
 
     //return book title

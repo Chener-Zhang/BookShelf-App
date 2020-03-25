@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -38,12 +39,8 @@ public class BookListFragment extends Fragment {
     }
 
     public void list_view_adaptor() {
-
-        ArrayAdapter<String> listview_adaptor = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, my_library.getALLBooktitle());
-
         ListView book_list_view = this.view.findViewById(R.id.booklist_fragment);
-        book_list_view.setAdapter(listview_adaptor);
-        System.out.println("the number is " + my_library.getNumber_Book());
+
     }
 
 

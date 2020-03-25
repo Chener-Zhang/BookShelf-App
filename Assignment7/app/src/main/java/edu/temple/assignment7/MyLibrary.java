@@ -42,19 +42,28 @@ public class MyLibrary {
     }
 
     //return book title
-    public String[] getBooktitle() {
+    public String[] getALLBooktitle() {
         String[] books = new String[getNumber_Book()];
         for (int i = 0; i < number_Book; i++) {
             books[i] = context.getResources().getStringArray(R.array.book_name)[i];
         }
         return books;
     }
-
-    //return book author
-    public String getBookAuthor(String book_name) {
-        return library_map.get(book_name);
+    public String[] getAllAuthors(){
+        String[] authors = new String[getNumber_Book()];
+        for (int i = 0; i < number_Book; i++) {
+            String author = library_map.get(context.getResources().getStringArray(R.array.book_name)[i]);
+            authors[i] = author;
+        }
+        return authors;
     }
 
+
+    //return book author
+    public String getSingleBookAuthor(String book_name) {
+        return library_map.get(book_name);
+    }
+    public String getSingleBook(int index){return null;}
 
     /*
     public void addbook() {}

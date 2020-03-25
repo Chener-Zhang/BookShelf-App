@@ -12,5 +12,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.portrait);
         // you need the check the case here;
 
+        //test
+        testing();
+
+    }
+
+
+    public void testing() {
+        MyLibrary lib = new MyLibrary(this);
     }
 }

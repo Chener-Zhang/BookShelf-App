@@ -3,14 +3,8 @@ package edu.temple.assignment7;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class two_item_adaptor extends BaseAdapter {
@@ -21,8 +15,8 @@ public class two_item_adaptor extends BaseAdapter {
     private MyLibrary hashMap;
 
     public two_item_adaptor(Context context, MyLibrary hashMap) {
-            this.context = context;
-            this.hashMap = hashMap;
+        this.context = context;
+        this.hashMap = hashMap;
     }
 
     @Override
@@ -42,12 +36,13 @@ public class two_item_adaptor extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        System.out.println("in the getview function");// does not print out
 
-        convertView = View.inflate(context,R.layout.fragment_book_list,null);
+        System.out.println("get here");
 
-        TextView book_name = (TextView) convertView.findViewById(R.id.book_name);
-        TextView author_name = (TextView) convertView.findViewById(R.id.author_name);
+        View view = View.inflate(context,R.layout.fragment_book_list_row,null);
+
+        TextView book_name = (TextView) view.findViewById(R.id.book_name);
+        TextView author_name = (TextView) view.findViewById(R.id.author_name);
 
         String BOOK_NAME = (String) getItem(position);
         String AUTHOR_NAME = hashMap.getSingleBookAuthor(BOOK_NAME);
@@ -55,6 +50,8 @@ public class two_item_adaptor extends BaseAdapter {
         book_name.setText(BOOK_NAME);
         author_name.setText(AUTHOR_NAME);
 
-        return convertView;
+
+
+        return view;
     }
 }

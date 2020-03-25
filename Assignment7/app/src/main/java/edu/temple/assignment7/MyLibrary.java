@@ -11,7 +11,7 @@ public class MyLibrary {
     Context context;
 
 
-    //init
+    //init Constructor
     public MyLibrary(Context main_content) {
         this.context = main_content;
         this.library_map = new HashMap();
@@ -21,12 +21,12 @@ public class MyLibrary {
     public void init() {
         Resources res = context.getResources();
         int number_of_books = res.getStringArray(R.array.book_name).length;
-        System.out.println("the numbers of the book are: " + number_of_books);
         for (int i = 0; i < number_of_books; i++) {
             String book_name = res.getStringArray(R.array.book_name)[i];
             String book_author = res.getStringArray(R.array.book_author)[i];
             library_map.put(book_name, book_author);
         }
+        getNumber_Book();
     }
 
 

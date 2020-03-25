@@ -18,6 +18,7 @@ public class BookListFragment extends Fragment {
 
     MyLibrary my_library;
     View view;
+
     public BookListFragment() {
         // Required empty public constructor
     }
@@ -26,26 +27,22 @@ public class BookListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.portrait, container, false);
-        //init lib
-        my_library = new MyLibrary(getActivity());
-        my_library.init();
-        //finished init lib
+        this.my_library = new MyLibrary(getActivity());
+        this.my_library.init();
         this.view = view;
+        System.out.println("numbers are ：" + my_library.number_Book);
         list_view_adaptor();
+
         return view;
     }
 
     public void list_view_adaptor() {
-        two_item_adaptor adaptor = new two_item_adaptor(getContext(),my_library);
+        two_item_adaptor adaptor = new two_item_adaptor(getContext(), my_library);
         ListView book_list = (ListView) view.findViewById(R.id.portrait_xml_ListView);
         book_list.setAdapter(adaptor);
 
-
     }
-
 
 
 }

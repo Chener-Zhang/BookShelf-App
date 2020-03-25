@@ -11,7 +11,6 @@ public class MyLibrary {
     Context context;
 
 
-
     //init
     public MyLibrary(Context main_content) {
         this.context = main_content;
@@ -46,23 +45,16 @@ public class MyLibrary {
         return null;
     }
 
-
     //return book author
-    public String getBookAuthor() {
-        return null;
-    }
-
-    // add book
-    public void addbook() {
-
-    }
-
-    //delete the book
-    public void rmbook() {
-
+    public String getBookAuthor(String book_name) {
+        return library_map.get(book_name);
     }
 
 
+    /*
+    public void addbook() {}
+    public void rmbook() {}
+    */
 
 
 }

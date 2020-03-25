@@ -37,12 +37,17 @@ public class MyLibrary {
 
     //return the # of book
     public int getNumber_Book() {
-        return library_map.size();
+        this.number_Book = library_map.size();
+        return number_Book;
     }
 
     //return book title
-    public String getBooktitle() {
-        return null;
+    public String[] getBooktitle() {
+        String[] books = new String[getNumber_Book()];
+        for (int i = 0; i < number_Book; i++) {
+            books[i] = context.getResources().getStringArray(R.array.book_name)[i];
+        }
+        return books;
     }
 
     //return book author

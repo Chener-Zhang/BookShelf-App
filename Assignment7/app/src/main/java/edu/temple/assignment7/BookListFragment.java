@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 
 public class BookListFragment extends Fragment {
@@ -26,9 +28,7 @@ public class BookListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        System.out.println("get here");
-        View view = inflater.inflate(R.layout.fragment_book_list, container, false);
-
+        View view = inflater.inflate(R.layout.portrait, container, false);
         //init lib
         my_library = new MyLibrary(getActivity());
         my_library.init();
@@ -39,7 +39,10 @@ public class BookListFragment extends Fragment {
     }
 
     public void list_view_adaptor() {
-        ListView book_list_view = this.view.findViewById(R.id.booklist_fragment);
+        two_item_adaptor adaptor = new two_item_adaptor(getContext(),my_library);
+        ListView book_list = (ListView) view.findViewById(R.id.portrait_xml_ListView);
+        book_list.setAdapter(adaptor);
+
 
     }
 

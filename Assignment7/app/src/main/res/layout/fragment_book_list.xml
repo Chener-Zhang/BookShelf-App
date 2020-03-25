@@ -6,12 +6,19 @@
     tools:context=".BookListFragment">
 
     <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:id="@+id/book_name"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="book name" />
+            <TextView
+                android:id="@+id/author_name"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="author name"
+                />
 
-
-    <ListView
-        android:layout_width="match_parent"
-        android:id="@+id/booklist_fragment"
-        android:layout_height="match_parent"
-        />
 
 </LinearLayout>

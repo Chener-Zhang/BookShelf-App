@@ -63,12 +63,17 @@ public class MyLibrary {
     public String getSingleBookAuthor(String book_name) {
         return library_map.get(book_name);
     }
-    public String getSingleBook(int index){return null;}
 
-    /*
-    public void addbook() {}
-    public void rmbook() {}
-    */
+    public String getSingleBook(int index){
+        int counter = 0;
+        for(String book : getALLBooktitle()){
+            if(index == counter){
+                return book;
+            }
+            counter++;
+        }
+        return null;
+    }
 
 
 }

@@ -31,9 +31,8 @@ public class BookListFragment extends Fragment {
         this.my_library = new MyLibrary(getActivity());
         this.my_library.init();
         this.view = view;
-        System.out.println("numbers are ：" + my_library.number_Book);
-        list_view_adaptor();
 
+        list_view_adaptor();
         return view;
     }
 

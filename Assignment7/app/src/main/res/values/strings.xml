@@ -2,18 +2,28 @@
     <string name="app_name">Assignment7</string>
 
     <string-array name="book_name">
-        <item>The Silent Patient</item>
-        <item>All Quiet on the Western Front</item>
-        <item>Daisy Jones and The Six</item>
-        <item>The Testaments</item>
-        <item>City of Girls</item>
+        <item>Book1</item>
+        <item>Book2</item>
+        <item>Book3</item>
+        <item>Book4</item>
+        <item>Book5</item>
+        <item>Book6</item>
+        <item>Book7</item>
+        <item>Book8</item>
+        <item>Book9</item>
+        <item>Book10</item>
     </string-array>
 
     <string-array name="book_author">
-        <item>Alex Michaelides </item>
-        <item>Erich Maria Remarque</item>
-        <item>Taylor Jenkins Reid</item>
-        <item>Margaret Atwood</item>
-        <item>Elizabeth Gilbert</item>
+        <item>Author1</item>
+        <item>Author2</item>
+        <item>Author3</item>
+        <item>Author4</item>
+        <item>Author5</item>
+        <item>Author6</item>
+        <item>Author7</item>
+        <item>Author8</item>
+        <item>Author9</item>
+        <item>Author10</item>
     </string-array>
 </resources>

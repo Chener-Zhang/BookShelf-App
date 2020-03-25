@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 
 public class two_item_adaptor extends BaseAdapter {
-
-
     //Constructor
     private Context context;
     private MyLibrary hashMap;
@@ -37,20 +35,13 @@ public class two_item_adaptor extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        System.out.println("get here");
-
         View view = View.inflate(context,R.layout.fragment_book_list_row,null);
-
         TextView book_name = (TextView) view.findViewById(R.id.book_name);
         TextView author_name = (TextView) view.findViewById(R.id.author_name);
-
         String BOOK_NAME = (String) getItem(position);
         String AUTHOR_NAME = hashMap.getSingleBookAuthor(BOOK_NAME);
-
         book_name.setText(BOOK_NAME);
         author_name.setText(AUTHOR_NAME);
-
-
 
         return view;
     }

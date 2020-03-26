@@ -35,7 +35,7 @@ public class Book_Adaptor extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View view = View.inflate(context,R.layout.fragment_book_list_row,null);
+        View view = View.inflate(context,R.layout.list_single_row,null);
         TextView book_name = (TextView) view.findViewById(R.id.book_name);
         TextView author_name = (TextView) view.findViewById(R.id.author_name);
         String BOOK_NAME = (String) getItem(position);

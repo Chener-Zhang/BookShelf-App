@@ -51,8 +51,8 @@ public class Portrait extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String book = library.getSingleBook(position);
                 String author = library.getSingleBookAuthor(book);
-                fragmentManager.beginTransaction().replace(,book_detail_fragment).commit();
-
+                System.out.println("author " + author + "book " + book);
+                fragmentManager.beginTransaction().replace(getId(),book_detail_fragment).addToBackStack(null).commit();
             }
         });
         

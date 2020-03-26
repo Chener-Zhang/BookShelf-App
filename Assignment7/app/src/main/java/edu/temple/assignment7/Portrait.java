@@ -12,9 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class Portrait extends Fragment {
 
 
@@ -46,12 +44,12 @@ public class Portrait extends Fragment {
 
         mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             FragmentManager fragmentManager = getFragmentManager();
-            Book_Detail_Fragment book_detail_fragment = new Book_Detail_Fragment();
+            Book_Detail_Fragment book_detail_fragment;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String book = library.getSingleBook(position);
                 String author = library.getSingleBookAuthor(book);
-                System.out.println("author " + author + "book " + book);
+                book_detail_fragment = Book_Detail_Fragment.newInstance(book,author);
                 fragmentManager.beginTransaction().replace(getId(),book_detail_fragment).addToBackStack(null).commit();
             }
         });

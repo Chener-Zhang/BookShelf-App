@@ -8,10 +8,10 @@
         android:layout_width="300dp"
         android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/landscape_canvas_right"
-        android:layout_width="300dp"
+    <fragment
+        android:id="@+id/landscape_fragment_right"
+        android:layout_width="350dp"
         android:layout_height="match_parent"
-        android:text="CANVAS!!"
-        />
+        android:name="edu.temple.assignment7.BookDetailsFragment"
+        ></fragment>
 </LinearLayout>

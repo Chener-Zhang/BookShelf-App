@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 
 public class BookListFragment extends Fragment {
@@ -65,6 +67,22 @@ public class BookListFragment extends Fragment {
         ListView book_list = view.findViewById(R.id.landscape_listView_left_xml);
         book_list.setAdapter(adaptor);
 
+
+
+
+
+        book_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            FragmentManager fragmentManager = getFragmentManager();
+            BookDetailsFragment bookDetailsFragment;
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String book = my_library.getSingleBook(position);
+                String author = my_library.getSingleBookAuthor(book);
+                bookDetailsFragment = BookDetailsFragment.newInstance(book,author);
+                fragmentManager.beginTransaction().replace(R.id.landscape_fragment_right,bookDetailsFragment).commit();
+
+            }
+        });
 
     }
 

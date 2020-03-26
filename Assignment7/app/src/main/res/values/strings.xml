@@ -14,6 +14,8 @@
         <item>Book8</item>
         <item>Book9</item>
         <item>Book10</item>
+        <item>Book11</item>
+        <item>Book12</item>
     </string-array>
 
     <string-array name="book_author">
@@ -27,6 +29,8 @@
         <item>Author8</item>
         <item>Author9</item>
         <item>Author10</item>
+        <item>Author11</item>
+        <item>Author12</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

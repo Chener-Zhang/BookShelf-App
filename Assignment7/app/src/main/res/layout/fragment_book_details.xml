@@ -9,13 +9,16 @@
     <TextView
         android:id="@+id/book_canvas"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="center"/>
+        android:layout_height="50dp"
+        android:textAlignment="center"
+
+        />
 
     <TextView
         android:id="@+id/author_canvas"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-    />
+        android:layout_height="50dp"
+        android:textAlignment="center"
+
+        />
 </LinearLayout>

@@ -46,7 +46,7 @@ public class Portrait extends Fragment {
 
         mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             FragmentManager fragmentManager = getFragmentManager();
-            book_detail_fragment book_detail_fragment = new book_detail_fragment();
+            Book_Detail_Fragment book_detail_fragment = new Book_Detail_Fragment();
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String book = library.getSingleBook(position);

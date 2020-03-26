@@ -16,8 +16,11 @@ public class MainActivity extends AppCompatActivity {
 
         library = new Map_Library(this);
         library.init();
+
         Book_Adaptor adaptor = new Book_Adaptor(this,library);
         ListView booklist = (ListView) findViewById(R.id.booklist);
         booklist.setAdapter(adaptor);
+
+
     }
 }

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
 
 
 public class BookDetailsFragment extends Fragment {
@@ -47,7 +47,12 @@ public class BookDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_book_details, container, false);
+
+        TextView book = view.findViewById(R.id.book_information);
+        TextView information = view.findViewById(R.id.content_information);
+        book.setText(this.book);
+        information.setText(this.content);
+        return view;
     }
 }

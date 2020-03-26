@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             fragmentTransaction.replace(android.R.id.content,landscape );
         }
-
+        
         fragmentTransaction.commit();
     }
 

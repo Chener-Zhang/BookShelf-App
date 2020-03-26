@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:orientation="vertical"
     tools:context=".book_detail_fragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,8 +11,16 @@
     <TextView
         android:id="@+id/book_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:text="The is the detail of the book"
         android:textAlignment="center" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/author_name"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="The is the author of the book"
+        android:textAlignment="center" />
+
+
+</LinearLayout>

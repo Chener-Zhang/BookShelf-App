@@ -6,13 +6,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+/*
+* his adapter is to connect the book and author name into single row of the list;
+*/
 
 public class Book_Adaptor extends BaseAdapter {
-    //Constructor
-    private Context context;
-    private MyLibrary hashMap;
 
-    public Book_Adaptor(Context context, MyLibrary hashMap) {
+
+    private Context context;
+    private Map_Library hashMap;
+
+    public Book_Adaptor(Context context, Map_Library hashMap) {
         this.context = context;
         this.hashMap = hashMap;
     }
@@ -35,11 +39,14 @@ public class Book_Adaptor extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View view = View.inflate(context,R.layout.list_single_row,null);
+        View view = View.inflate(context, R.layout.single_row_information, null);
+
         TextView book_name = (TextView) view.findViewById(R.id.book_name);
         TextView author_name = (TextView) view.findViewById(R.id.author_name);
+
         String BOOK_NAME = (String) getItem(position);
         String AUTHOR_NAME = hashMap.getSingleBookAuthor(BOOK_NAME);
+
         book_name.setText(BOOK_NAME);
         author_name.setText(AUTHOR_NAME);
 

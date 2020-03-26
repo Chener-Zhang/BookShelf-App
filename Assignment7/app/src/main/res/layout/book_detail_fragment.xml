@@ -11,14 +11,14 @@
     <TextView
         android:id="@+id/book_name"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="129dp"
         android:text="The is the detail of the book"
         android:textAlignment="center" />
 
     <TextView
         android:id="@+id/author_name"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="182dp"
         android:text="The is the author of the book"
         android:textAlignment="center" />
 

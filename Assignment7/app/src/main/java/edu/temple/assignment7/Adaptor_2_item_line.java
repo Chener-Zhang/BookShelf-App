@@ -7,12 +7,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
-public class two_item_adaptor extends BaseAdapter {
+public class Adaptor_2_item_line extends BaseAdapter {
     //Constructor
     private Context context;
     private MyLibrary hashMap;
 
-    public two_item_adaptor(Context context, MyLibrary hashMap) {
+    public Adaptor_2_item_line(Context context, MyLibrary hashMap) {
         this.context = context;
         this.hashMap = hashMap;
     }

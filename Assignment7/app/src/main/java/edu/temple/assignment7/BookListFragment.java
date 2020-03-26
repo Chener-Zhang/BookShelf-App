@@ -47,20 +47,25 @@ public class BookListFragment extends Fragment {
             } else if (type.equals("l")) {
                 view = inflater.inflate(R.layout.landscape, container, false);
                 this.view = view;
+                list_view_adaptor_landscape();
             }
-
         }
-
-
         return this.view;
     }
 
     public void list_view_adaptor_portrait() {
-        two_item_adaptor adaptor = new two_item_adaptor(getContext(), my_library);
+        Adaptor_2_item_line adaptor = new Adaptor_2_item_line(getContext(), my_library);
         ListView book_list = view.findViewById(R.id.portrait_xml_ListView);
         book_list.setAdapter(adaptor);
-
+        //add the code for Bookdetail;
     }
 
+    public void list_view_adaptor_landscape() {
+        Adaptor_2_item_line adaptor = new Adaptor_2_item_line(getContext(), my_library);
+        ListView book_list = view.findViewById(R.id.landscape_listView_left_xml);
+        book_list.setAdapter(adaptor);
+
+
+    }
 
 }

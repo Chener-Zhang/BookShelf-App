@@ -6,9 +6,27 @@
     tools:context=".Landscape">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:text="hello from the landscape" />
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <fragment
+            android:id="@+id/landscape_left_list_fragment"
+            android:name="edu.temple.assignment7.Landscape"
+            android:layout_width="335dp"
+            android:layout_height="match_parent"></fragment>
+
+        <fragment
+            android:id="@+id/landscape_right_list_canvas"
+            android:name="edu.temple.assignment7.Landscape"
+            android:layout_width="346dp"
+            android:layout_height="match_parent"></fragment>
+
+    </LinearLayout>
+
 
 </FrameLayout>

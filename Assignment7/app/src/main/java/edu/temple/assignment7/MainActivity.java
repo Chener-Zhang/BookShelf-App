@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         Portrait portrait = new Portrait();
         Landscape landscape = new Landscape();
+
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             fragmentTransaction.replace(android.R.id.content, portrait);
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             fragmentTransaction.replace(android.R.id.content,landscape );
         }
-
 
         fragmentTransaction.commit();
     }

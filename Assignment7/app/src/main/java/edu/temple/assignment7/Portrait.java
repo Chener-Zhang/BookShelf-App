@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 
 /**
@@ -14,17 +15,36 @@ import android.view.ViewGroup;
  */
 public class Portrait extends Fragment {
 
-    public Portrait() {
-        // Required empty public constructor
-    }
 
+    View view;
+    MyLibrary library;
+
+    public Portrait() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_portrait, container, false);
 
+        view = inflater.inflate(R.layout.fragment_portrait, container, false);
+        library = new MyLibrary(getContext());
+        library.init();
+        portait_adaptor();
+        return view;
     }
+
+
+    public void portait_adaptor(){
+        Book_Adaptor adaptor = new Book_Adaptor(getContext(),library);
+        ListView mylist = view.findViewById(R.id.fragment_list_for_portrait);
+        mylist.setAdapter(adaptor);
+
+        
+    }
+
+
+
 
 
 }

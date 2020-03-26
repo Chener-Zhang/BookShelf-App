@@ -11,9 +11,5 @@
         android:layout_height="match_parent"
         android:text="you reach the fragement"
         />
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_list_for_portrait"
-        />
+
 </FrameLayout>

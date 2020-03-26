@@ -12,21 +12,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        book_list_fragment fragment = null;
 
-
+        Portrait portrait = new Portrait();
+        Landscape landscape = new Landscape();
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            fragment = book_list_fragment.newInstance("p");
+            fragmentTransaction.replace(android.R.id.content, portrait);
         }
 
         else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            //book_list_fragment
+            fragmentTransaction.replace(android.R.id.content,landscape );
         }
 
-        fragmentTransaction.replace(android.R.id.content, fragment);
+
         fragmentTransaction.commit();
     }
 

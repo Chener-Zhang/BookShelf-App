@@ -36,6 +36,7 @@ public class book_list_fragment extends Fragment {
         if(bundle!=null){
 
             if(bundle.getString(view_type).equals("p")){
+                portait_adaptor();
                 VIEW = inflater.inflate(R.layout.book_list_fragment, container, false);
 
             }else if(bundle.getString(view_type).equals("l")){
@@ -49,6 +50,8 @@ public class book_list_fragment extends Fragment {
     public void portait_adaptor(){
         MyLibrary library = new MyLibrary(getContext());
         Book_Adaptor adaptor = new Book_Adaptor(getContext(),library);
+        ListView mylist = VIEW.findViewById(R.id.fragment_list_for_portrait);
+        //mylist.setAdapter(adaptor);
 
     }
 

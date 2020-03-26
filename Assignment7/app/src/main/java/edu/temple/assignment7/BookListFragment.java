@@ -54,14 +54,14 @@ public class BookListFragment extends Fragment {
     }
 
     public void list_view_adaptor_portrait() {
-        Adaptor_2_item_line adaptor = new Adaptor_2_item_line(getContext(), my_library);
+        Book_Adaptor adaptor = new Book_Adaptor(getContext(), my_library);
         ListView book_list = view.findViewById(R.id.portrait_xml_ListView);
         book_list.setAdapter(adaptor);
         //add the code for Bookdetail;
     }
 
     public void list_view_adaptor_landscape() {
-        Adaptor_2_item_line adaptor = new Adaptor_2_item_line(getContext(), my_library);
+        Book_Adaptor adaptor = new Book_Adaptor(getContext(), my_library);
         ListView book_list = view.findViewById(R.id.landscape_listView_left_xml);
         book_list.setAdapter(adaptor);
 

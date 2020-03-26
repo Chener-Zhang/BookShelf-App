@@ -5,14 +5,18 @@ import android.content.res.Resources;
 
 import java.util.HashMap;
 
-public class MyLibrary {
+
+/*
+* fetch the data from the values in the android source
+* */
+public class Map_Library {
     public int number_Book;
     public HashMap<String, String> library_map;
     Context context;
 
 
     //init Constructor
-    public MyLibrary(Context main_content) {
+    public Map_Library(Context main_content) {
         this.context = main_content;
         this.library_map = new HashMap();
     }

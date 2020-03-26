@@ -12,12 +12,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 
+/*
+* Dealing with the case of portrait
+* */
+
 
 public class Portrait extends Fragment {
 
 
     View view;
-    MyLibrary library;
+    Map_Library library;
 
     public Portrait() {
 
@@ -28,7 +32,7 @@ public class Portrait extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_portrait, container, false);
-        library = new MyLibrary(getContext());
+        library = new Map_Library(getContext());
         library.init();
         portait_adaptor();
         return view;

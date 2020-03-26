@@ -9,17 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
+/*
+* This class pass the data from the my library map to the Textview;
+*/
 public class Book_Detail_Fragment extends Fragment {
-
-
 
 
     private static String book_name = "book_name";
     private static String book_author = " book_author";
     private View view;
-    public Book_Detail_Fragment() {
 
+
+    public Book_Detail_Fragment() {
     }
 
     public static Book_Detail_Fragment newInstance(String bookname, String bookauthor) {
@@ -34,13 +35,13 @@ public class Book_Detail_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.book_detail_fragment, container, false);
+        view = inflater.inflate(R.layout.book_detail_both, container, false);
         Bundle bundle = getArguments();
-        context_setup(bundle.getString(book_name),bundle.getString(book_author));
+        context_setup(bundle.getString(book_name), bundle.getString(book_author));
         return view;
     }
 
-    public void context_setup(String book, String author){
+    public void context_setup(String book, String author) {
         TextView bookname_view = view.findViewById(R.id.book_name);
         TextView author_view = view.findViewById(R.id.author_name);
         bookname_view.setText(book);

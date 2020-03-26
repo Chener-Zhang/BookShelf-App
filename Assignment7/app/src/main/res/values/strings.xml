@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Assignment7</string>
+    <string name="book_name">book name</string>
+    <string name="author_name">author name</string>
 
     <string-array name="book_name">
         <item>Book1</item>
@@ -26,4 +28,8 @@
         <item>Author9</item>
         <item>Author10</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textview">TextView</string>
 </resources>

@@ -11,13 +11,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:text="book name" />
+                android:text="@string/book_name" />
             <TextView
                 android:id="@+id/author_name"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:text="author name"
+                android:text="@string/author_name"
                 />
 
 

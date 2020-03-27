@@ -49,12 +49,19 @@ public class MainActivity extends AppCompatActivity {
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                    BookDetailsFragment bookDetailsFragment = BookDetailsFragment.newInstance(current_book,current_author);
+                    BookDetailsFragment bookDetailsFragment = BookDetailsFragment.newInstance(current_book, current_author);
 
                     System.out.println(res.getString(R.string.device));
 
                     if (isPhone) {
-                        fragmentTransaction.add(android.R.id.content, bookDetailsFragment).addToBackStack(null).commit();
+                        if (res.getString(R.string.device).equals("portrait")) {
+                            fragmentTransaction.add(android.R.id.content, bookDetailsFragment).addToBackStack(null).commit();
+                            
+                        } else if (res.getString(R.string.device).equals("landscape"))
+                        {
+                            fragmentTransaction.replace(R.id.bookdetail, bookDetailsFragment).commit();
+                        }
+
                     } else {
                         fragmentTransaction.replace(R.id.bookdetail, bookDetailsFragment).commit();
 

@@ -14,12 +14,9 @@
 
     <FrameLayout
         android:id="@+id/bookdetail"
-        android:layout_width="158dp"
+        android:layout_width="377dp"
         android:layout_height="match_parent" />
 
-    <TextView
-        android:layout_width="195dp"
-        android:layout_height="match_parent"
-        android:text="@string/device" />
+
 
 </LinearLayout>

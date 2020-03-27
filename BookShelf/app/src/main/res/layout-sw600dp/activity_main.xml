@@ -8,12 +8,12 @@
 
     <ListView
         android:id="@+id/booklist"
-        android:layout_width="490dp"
+        android:layout_width="271dp"
         android:layout_height="match_parent" />
 
     <FrameLayout
         android:id="@+id/bookdetail"
-        android:layout_width="533dp"
+        android:layout_width="716dp"
         android:layout_height="match_parent" />
 
 

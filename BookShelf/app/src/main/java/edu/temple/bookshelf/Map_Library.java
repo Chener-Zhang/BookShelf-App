@@ -19,6 +19,7 @@ public class Map_Library {
     public Map_Library(Context main_content) {
         this.context = main_content;
         this.library_map = new HashMap();
+        init();
     }
 
     //init the map

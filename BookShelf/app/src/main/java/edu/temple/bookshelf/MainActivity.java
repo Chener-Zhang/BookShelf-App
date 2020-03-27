@@ -54,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(res.getString(R.string.device));
 
                     if (isPhone) {
+
                         if (res.getString(R.string.device).equals("portrait")) {
-                            fragmentTransaction.add(android.R.id.content, bookDetailsFragment).addToBackStack(null).commit();
-                            
+                            fragmentTransaction.replace(android.R.id.content, bookDetailsFragment).addToBackStack(null);
+                            fragmentTransaction.commit();
+
                         } else if (res.getString(R.string.device).equals("landscape"))
                         {
                             fragmentTransaction.replace(R.id.bookdetail, bookDetailsFragment).commit();

@@ -8,14 +8,17 @@
 
     <ListView
         android:id="@+id/booklist"
-        android:layout_width="339dp"
+        android:layout_width="490dp"
         android:layout_height="match_parent" />
 
     <FrameLayout
         android:id="@+id/bookdetail"
+        android:layout_width="273dp"
+        android:layout_height="match_parent" />
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:text="@string/device"
         />
-
 
 </LinearLayout>

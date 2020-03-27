@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
                     BookDetailsFragment bookDetailsFragment = BookDetailsFragment.newInstance(current_book,current_author);
 
+                    System.out.println(res.getString(R.string.device));
+
                     if (isPhone) {
                         fragmentTransaction.add(android.R.id.content, bookDetailsFragment).addToBackStack(null).commit();
                     } else {

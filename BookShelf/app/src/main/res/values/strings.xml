@@ -35,5 +35,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <bool name="isPhone">true</bool>
     <string name="device">portrait</string>
+    <string name="content_information">content_information</string>
+    <string name="book_information">book_information</string>
 
 </resources>

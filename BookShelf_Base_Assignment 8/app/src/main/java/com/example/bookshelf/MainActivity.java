@@ -5,6 +5,18 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     boolean twoPane;
     BookDetailsFragment bookDetailsFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
         fm.beginTransaction()
                 .replace(R.id.container1, BookListFragment.newInstance(getTestBooks()))
-        .commit();
+                .commit();
 
         /*
         If we have two containers available, load a single instance
@@ -38,6 +51,12 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     .replace(R.id.container2, bookDetailsFragment)
                     .commit();
         }
+
+
+        System.out.println("begin the connection ");
+        printJson();
+
+
     }
 
     /*
@@ -56,7 +75,28 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         return books;
     }
 
+    ;
 
+
+    public void printJson() {
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        String url = "https://kamorris.com/lab/abp/booksearch.php?";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println("connection success");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("connection fail");
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
 
 
     @Override

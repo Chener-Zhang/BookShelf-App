@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     /*
     Generate an arbitrary list of "books" for testing
      */
+
     private ArrayList<HashMap<String, String>> getTestBooks() {
         ArrayList<HashMap<String, String>> books = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> book;
@@ -53,7 +54,10 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             books.add(book);
         }
         return books;
-    };
+    }
+
+
+
 
     @Override
     public void bookSelected(int index) {

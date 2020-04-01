@@ -88,6 +88,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             @Override
             public void onResponse(JSONArray response) {
                 System.out.println("connection success");
+
+                try {
+                    JSONObject jsonObject = response.getJSONObject(0);
+                    System.out.println(jsonObject.getString("author"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

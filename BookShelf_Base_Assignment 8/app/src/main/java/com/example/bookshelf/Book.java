@@ -30,6 +30,10 @@ public class Book {
     public String getCOVER_URL() {
         return COVER_URL;
     }
+
+    public String book_printer(){
+        return null;
+    }
 }
 
 

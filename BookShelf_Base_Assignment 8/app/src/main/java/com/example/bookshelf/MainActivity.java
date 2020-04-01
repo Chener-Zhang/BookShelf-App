@@ -9,6 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -83,19 +84,19 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
         String url = "https://kamorris.com/lab/abp/booksearch.php?";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(JSONArray response) {
                 System.out.println("connection success");
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("connection fail");
-                error.printStackTrace();
+
             }
         });
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(jsonArrayRequest);
     }
 
 

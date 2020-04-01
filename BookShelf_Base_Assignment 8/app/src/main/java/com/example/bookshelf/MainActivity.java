@@ -72,13 +72,15 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                         String title = jsonObject.getString("title");
                         String author = jsonObject.getString("author");
                         String cover_url = jsonObject.getString("cover_url");
-                        Book newbook = new Book(book_id,title,author,cover_url);
-                        books_collection.add(newbook);
-                        
 
+                        Book newbook = new Book(book_id, title, author, cover_url);
+                        String book = newbook.book_printer();
+                        System.out.println(book);
+                        books_collection.add(newbook);
                     }
 
                 } catch (JSONException e) {
+                    System.out.println("something went wrong");
                     e.printStackTrace();
                 }
             }
@@ -113,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 */
 
     }
-
 
 
 }

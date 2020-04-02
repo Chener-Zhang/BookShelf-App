@@ -27,6 +27,40 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     public ArrayList<Book> books_collection;
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        twoPane = findViewById(R.id.container2) != null;
+
+        fm = getSupportFragmentManager();
+
+        getTestBooks(new VolleyCallback() {
+            @Override
+            public void get_data(JSONArray response) {
+                System.out.println("you have reach here");
+                System.out.println("the response number you get is " + response.length());
+             
+            }
+        });
+
+/*
+        fm.beginTransaction()
+                .replace(R.id.container1, BookListFragment.newInstance(getTestBooks()))
+                .commit();
+
+        if (twoPane) {
+            bookDetailsFragment = new BookDetailsFragment();
+            fm.beginTransaction()
+                    .replace(R.id.container2, bookDetailsFragment)
+                    .commit();
+        }
+*/
+    }
+
+
+
     private ArrayList<Book> getTestBooks(final VolleyCallback callback) {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -48,41 +82,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
         return books_collection;
     }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        twoPane = findViewById(R.id.container2) != null;
-
-        fm = getSupportFragmentManager();
-
-        getTestBooks(new VolleyCallback() {
-            @Override
-            public void get_data(JSONArray response) {
-                System.out.println("you have reach here");
-                System.out.println("the response number you get is " + response.length());
-                //int json_arr_size = jsonArray.length();
-                //System.out.println(json_arr_size);
-            }
-        });
-
-/*
-        fm.beginTransaction()
-                .replace(R.id.container1, BookListFragment.newInstance(getTestBooks()))
-                .commit();
-
-        if (twoPane) {
-            bookDetailsFragment = new BookDetailsFragment();
-            fm.beginTransaction()
-                    .replace(R.id.container2, bookDetailsFragment)
-                    .commit();
-        }
-*/
-    }
-
 
 
     @Override

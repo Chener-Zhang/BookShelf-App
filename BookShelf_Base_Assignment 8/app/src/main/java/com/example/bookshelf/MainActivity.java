@@ -1,5 +1,6 @@
 package com.example.bookshelf;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+    }
+
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -41,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                 System.out.println("you have reach here");
                 int books_collection_length = response.length();
                 fm = getSupportFragmentManager();
+                System.out.println("rotated");
+
 
                 for (int i = 0; i < books_collection_length; i++) {
                     int book_id = response.getJSONObject(i).getInt("book_id");
@@ -103,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             System.out.println("you have clicked on me on " + index);
             System.out.println(books.get(index).getAUTHOR());
 
-            fm.beginTransaction().replace(R.id.container1,BookDetailsFragment.newInstance(books.get(index))).addToBackStack(null).commit();
+            fm.beginTransaction().replace(R.id.container1, BookDetailsFragment.newInstance(books.get(index))).addToBackStack(null).commit();
 
 
         }

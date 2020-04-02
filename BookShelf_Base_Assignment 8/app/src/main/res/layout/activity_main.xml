@@ -11,25 +11,27 @@
         android:id="@+id/search_bar"
         android:layout_width="329dp"
         android:layout_height="42dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:hint="@string/search_bar"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
     </EditText>
 
     <FrameLayout
         android:id="@+id/container1"
-        android:layout_width="341dp"
-        android:layout_height="606dp"
+        android:layout_width="329dp"
+        android:layout_height="500dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar"
-        app:layout_constraintVertical_bias="0.194">
+        app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

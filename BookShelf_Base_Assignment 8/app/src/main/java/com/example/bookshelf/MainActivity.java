@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     String url = "https://kamorris.com/lab/abp/booksearch.php?";
     public ArrayList<Book> books_collection;
 
+    int test_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +38,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         fm = getSupportFragmentManager();
 
         getTestBooks(new VolleyCallback() {
+            int something;
             @Override
             public void get_data(JSONArray response) {
                 System.out.println("you have reach here");
-                System.out.println("the response number you get is " + response.length());
-             
+                something = response.length();
             }
+
         });
 
 /*

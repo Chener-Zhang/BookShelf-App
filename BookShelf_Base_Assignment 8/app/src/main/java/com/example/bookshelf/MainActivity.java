@@ -24,6 +24,30 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     boolean twoPane;
     BookDetailsFragment bookDetailsFragment;
     String url = "https://kamorris.com/lab/abp/booksearch.php?";
+    public ArrayList<Book> books_collection;
+
+
+    private ArrayList<Book> getTestBooks(final VolleyCallback callback) {
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        this.books_collection = new ArrayList<Book>();
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+                System.out.println("connection success");
+                callback.get_data(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("connection fail");
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
+
+        return books_collection;
+    }
 
 
     @Override
@@ -35,10 +59,17 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
         fm = getSupportFragmentManager();
 
-        getTestBooks();
+        getTestBooks(new VolleyCallback() {
+            @Override
+            public void get_data(JSONArray response) {
+                System.out.println("you have reach here");
+                System.out.println("the response number you get is " + response.length());
+                //int json_arr_size = jsonArray.length();
+                //System.out.println(json_arr_size);
+            }
+        });
 
-
-        /*
+/*
         fm.beginTransaction()
                 .replace(R.id.container1, BookListFragment.newInstance(getTestBooks()))
                 .commit();
@@ -49,59 +80,15 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     .replace(R.id.container2, bookDetailsFragment)
                     .commit();
         }
-        */
-
-
+*/
     }
 
-    private ArrayList<Book> getTestBooks() {
-        final ArrayList<Book> books_collection = new ArrayList<Book>();
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                System.out.println("connection success");
-
-                try {
-                    int json_arr_size = response.length();
-                    System.out.println("the length is " + json_arr_size);
-                    for (int i = 0; i < json_arr_size; i++) {
-                        JSONObject jsonObject = response.getJSONObject(i);
-
-                        int book_id = jsonObject.getInt("book_id");
-                        String title = jsonObject.getString("title");
-                        String author = jsonObject.getString("author");
-                        String cover_url = jsonObject.getString("cover_url");
-
-                        Book newbook = new Book(book_id, title, author, cover_url);
-                        String book = newbook.book_printer();
-                        System.out.println(book);
-                        books_collection.add(newbook);
-                    }
-
-                } catch (JSONException e) {
-                    System.out.println("something went wrong");
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("connection fail");
-
-            }
-        });
-        requestQueue.add(jsonArrayRequest);
-
-
-        return books_collection;
-    }
 
 
     @Override
     public void bookSelected(int index) {
-
         /*
+
         if (twoPane)
             bookDetailsFragment.displayBook(getTestBooks().get(index));
 
@@ -112,9 +99,12 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     .addToBackStack(null)
                     .commit();
         }
-*/
-
+    */
     }
 
 
+}
+
+interface VolleyCallback {
+    void get_data(JSONArray response);
 }

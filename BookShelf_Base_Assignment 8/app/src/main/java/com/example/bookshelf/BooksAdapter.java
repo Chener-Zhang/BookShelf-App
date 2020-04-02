@@ -14,7 +14,8 @@ import java.util.HashMap;
 public class BooksAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<HashMap<String, String>> books;
+    ArrayList<Book> books;
+
 
     public BooksAdapter (Context context, ArrayList books) {
         this.context = context;
@@ -41,18 +42,18 @@ public class BooksAdapter extends BaseAdapter {
         TextView titleTextView, authorTextView;
 
         if (!(convertView instanceof LinearLayout)) {
-            /*
-            Inflate a predefined layout file that includes 2 text views.
-            We could do this in code, but this seems a little easier
-             */
             convertView = LayoutInflater.from(context).inflate(R.layout.books_adapter_layout, parent, false);
         }
 
         titleTextView = convertView.findViewById(R.id.titleTextView);
         authorTextView = convertView.findViewById(R.id.authorTextView);
 
-        titleTextView.setText(((HashMap<String, String>) getItem(position)).get("title"));
-        authorTextView.setText(((HashMap<String, String>) getItem(position)).get("author"));
+        String title = books.get(position).getTITLE();
+        String author = books.get(position).getAUTHOR();
+
+        titleTextView.setText(title);
+        authorTextView.setText(author);
+
 
         return convertView;
     }

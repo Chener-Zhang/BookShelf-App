@@ -5,22 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class BooksAdapter extends BaseAdapter {
+public class BooksAdapter extends BaseAdapter implements Filterable {
 
     Context context;
     ArrayList<Book> books;
+    ArrayList<Book> book_list;
+    customize_filter filter;
 
 
-    public BooksAdapter (Context context, ArrayList books) {
+    public BooksAdapter(Context context, ArrayList books) {
         this.context = context;
         this.books = books;
+        book_list = books;
     }
+
 
     @Override
     public int getCount() {
@@ -57,4 +62,28 @@ public class BooksAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    @Override
+    public Filter getFilter() {
+        if(filter == null){
+            filter = new customize_filter();
+        }
+        return filter;
+    }
+
+    //inner class
+    class customize_filter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+                return null;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+                notifyDataSetChanged();
+        }
+    }
+
+
 }

@@ -46,7 +46,6 @@ public class BookDetailsFragment extends Fragment {
 
         titleTextView = v.findViewById(R.id.titleTextView);
         authorTextView = v.findViewById(R.id.authorTextView);
-
         /*
         Because this fragment can be created with or without
         a book to display when attached, we need to make sure

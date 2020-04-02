@@ -16,6 +16,8 @@ public class BooksAdapter extends BaseAdapter implements Filterable {
 
     Context context;
     ArrayList<Book> books;
+
+
     ArrayList<Book> book_list;
     customize_filter filter;
 
@@ -65,7 +67,7 @@ public class BooksAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public Filter getFilter() {
-        if(filter == null){
+        if (filter == null) {
             filter = new customize_filter();
         }
         return filter;
@@ -76,12 +78,31 @@ public class BooksAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+            FilterResults results = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                constraint = constraint.toString().toUpperCase();
+                ArrayList<Book> found_collection = new ArrayList<Book>();
+                for (int i = 0; i < book_list.size(); i++) {
+                    if (book_list.get(i).getAUTHOR().toUpperCase().contains(constraint)) {
+                        found_collection.add(book_list.get(i));
+
+                    }
+                }
+                results.count = found_collection.size();
+                results.values = found_collection;
+            } else {
+                results.count = book_list.size();
+                results.values = book_list;
+            }
+
+
+            return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-                notifyDataSetChanged();
+            books = (ArrayList<Book>) results.values;
+            notifyDataSetChanged();
         }
     }
 

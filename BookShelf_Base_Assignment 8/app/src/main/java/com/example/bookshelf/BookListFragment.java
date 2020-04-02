@@ -68,7 +68,7 @@ public class BookListFragment extends Fragment {
         ListView listView = (ListView) inflater.inflate(R.layout.fragment_book_list, container, false);
 
 
-        BooksAdapter adapter = new BooksAdapter(getContext(),books);
+        final BooksAdapter adapter = new BooksAdapter(getContext(),books);
         listView.setAdapter(adapter);
 
         EditText search_bar = getActivity().findViewById(R.id.my_search_bar);
@@ -84,7 +84,7 @@ public class BookListFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                    adapter.getFilter().filter(s);
             }
 
             @Override

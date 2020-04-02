@@ -13,66 +13,70 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements BookListFragment.BookSelectedInterface {
 
-    FragmentManager fm;
 
-    boolean twoPane;
     BookDetailsFragment bookDetailsFragment;
     String url = "https://kamorris.com/lab/abp/booksearch.php?";
-    public ArrayList<Book> books_collection;
+    FragmentManager fm;
+    boolean twoPane;
 
-    int test_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         twoPane = findViewById(R.id.container2) != null;
 
-        fm = getSupportFragmentManager();
+        getTestBooks_connection(new VolleyCallback() {
+            ArrayList<Book> books_collections = new ArrayList<Book>();
 
-        getTestBooks(new VolleyCallback() {
-            int something;
             @Override
-            public void get_data(JSONArray response) {
+            public void get_data(JSONArray response) throws JSONException {
                 System.out.println("you have reach here");
-                something = response.length();
+                int books_collection_length = response.length();
+                fm = getSupportFragmentManager();
+
+                for (int i = 0; i < books_collection_length; i++) {
+                    int book_id = response.getJSONObject(i).getInt("book_id");
+                    String book_title = response.getJSONObject(i).getString("title");
+                    String book_author = response.getJSONObject(i).getString("author");
+                    String book_cover_url = response.getJSONObject(i).getString("cover_url");
+                    Book new_book = new Book(book_id, book_title, book_author, book_cover_url);
+                    books_collections.add(new_book);
+                }
+
+                fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
+
+                if (twoPane) {
+                    bookDetailsFragment = new BookDetailsFragment();
+                    fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                }
             }
+
 
         });
 
-/*
-        fm.beginTransaction()
-                .replace(R.id.container1, BookListFragment.newInstance(getTestBooks()))
-                .commit();
 
-        if (twoPane) {
-            bookDetailsFragment = new BookDetailsFragment();
-            fm.beginTransaction()
-                    .replace(R.id.container2, bookDetailsFragment)
-                    .commit();
-        }
-*/
     }
 
 
-
-    private ArrayList<Book> getTestBooks(final VolleyCallback callback) {
+    private void getTestBooks_connection(final VolleyCallback callback) {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        this.books_collection = new ArrayList<Book>();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
 
             @Override
             public void onResponse(JSONArray response) {
                 System.out.println("connection success");
-                callback.get_data(response);
+                try {
+                    callback.get_data(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -82,30 +86,30 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         });
         requestQueue.add(jsonArrayRequest);
 
-        return books_collection;
     }
 
 
     @Override
-    public void bookSelected(int index) {
-        /*
+    public void bookSelected(int index, ArrayList<Book> books) {
 
-        if (twoPane)
-            bookDetailsFragment.displayBook(getTestBooks().get(index));
 
-        else {
+        if (twoPane) {
+            System.out.println("you have clicked on me on " + index);
+            System.out.println(books.get(index).getAUTHOR());
+            bookDetailsFragment.displayBook(books.get(index));
+        } else {
+            System.out.println("you have clicked on me on " + index);
+            System.out.println(books.get(index).getAUTHOR());
 
-            fm.beginTransaction()
-                    .replace(R.id.container1, BookDetailsFragment.newInstance(getTestBooks().get(index)))
-                    .addToBackStack(null)
-                    .commit();
+            fm.beginTransaction().replace(R.id.container1,BookDetailsFragment.newInstance(books.get(index))).addToBackStack(null).commit();
+
+
         }
-    */
     }
 
 
 }
 
 interface VolleyCallback {
-    void get_data(JSONArray response);
+    void get_data(JSONArray response) throws JSONException;
 }

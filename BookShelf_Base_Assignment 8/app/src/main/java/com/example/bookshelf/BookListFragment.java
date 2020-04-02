@@ -28,8 +28,6 @@ public class BookListFragment extends Fragment {
 
     public static BookListFragment newInstance(ArrayList<Book> books) {
 
-
-
         BookListFragment fragment = new BookListFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(BOOK_LIST_KEY, books);
@@ -66,7 +64,7 @@ public class BookListFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                parentActivity.bookSelected(position);
+                parentActivity.bookSelected(position, books);
             }
         });
 
@@ -75,6 +73,6 @@ public class BookListFragment extends Fragment {
 
 
     interface BookSelectedInterface {
-        void bookSelected(int index);
+        void bookSelected(int index, ArrayList<Book> books);
     }
 }

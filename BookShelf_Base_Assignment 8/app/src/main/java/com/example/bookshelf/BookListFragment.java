@@ -3,6 +3,7 @@ package com.example.bookshelf;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.Parcelable;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Filter;
@@ -28,7 +30,6 @@ public class BookListFragment extends Fragment {
     private ArrayList<Book> books;
     BookSelectedInterface parentActivity;
     Context main_context;
-
 
 
     public BookListFragment() {
@@ -63,37 +64,31 @@ public class BookListFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ListView listView = (ListView) inflater.inflate(R.layout.fragment_book_list, container, false);
 
 
-        final BooksAdapter adapter = new BooksAdapter(getContext(),books);
+        final BooksAdapter adapter = new BooksAdapter(getContext(), books);
         listView.setAdapter(adapter);
 
-        EditText search_bar = getActivity().findViewById(R.id.my_search_bar);
+        final EditText search_bar = getActivity().findViewById(R.id.my_search_bar);
+        Button search_button = getActivity().findViewById(R.id.search_button);
 
-
-
-        search_bar.addTextChangedListener(new TextWatcher() {
-
+        search_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    adapter.getFilter().filter(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onClick(View v) {
+                String user_input = search_bar.getText().toString();
+                System.out.println("you have enter : " + user_input);
+                adapter.getFilter().filter(user_input);
             }
         });
-
-
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

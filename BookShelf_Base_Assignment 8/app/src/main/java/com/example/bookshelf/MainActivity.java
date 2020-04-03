@@ -27,13 +27,17 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     FragmentManager fm;
     boolean twoPane;
 
+    String first_p_l = "firstpl";
+    String first_l_p = "firstlp";
+    String second_p_l = "seondpl";
+    String second_l_p = "secondlp";
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
     }
-
 
 
     @Override
@@ -47,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
             @Override
             public void get_data(JSONArray response) throws JSONException {
-                System.out.println("you have reach here");
                 int books_collection_length = response.length();
                 fm = getSupportFragmentManager();
                 System.out.println("rotated");
@@ -62,12 +65,71 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     books_collections.add(new_book);
                 }
 
-                fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
+                BookListFragment bookListFragment = BookListFragment.newInstance(books_collections);
 
                 if (twoPane) {
-                    bookDetailsFragment = new BookDetailsFragment();
-                    fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                    BookDetailsFragment first_pl_transaction = (BookDetailsFragment) fm.findFragmentByTag(first_p_l);
+                    BookDetailsFragment second_pl_transaction = (BookDetailsFragment) fm.findFragmentByTag(second_p_l);
+
+
+                    if(second_pl_transaction!=null){
+                        System.out.println("landing in second p1 transaction");
+                        Book previous_book = second_pl_transaction.getbook();
+                        BookDetailsFragment replace_old_portrait = BookDetailsFragment.newInstance(previous_book);
+                        fm.beginTransaction().remove(second_pl_transaction);
+                        fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
+                        fm.beginTransaction().replace(R.id.container2, replace_old_portrait, second_l_p).commit();
+                    }
+                    else{
+                        if(first_pl_transaction!=null){
+                            System.out.println("last arrived");
+                            Book previous_book = first_pl_transaction.getbook();
+                            BookDetailsFragment replace_old_portrait = BookDetailsFragment.newInstance(previous_book);
+                            fm.beginTransaction().remove(first_pl_transaction);
+                            fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
+                            fm.beginTransaction().replace(R.id.container2, replace_old_portrait, second_l_p).commit();
+                        }else{
+                            fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
+                        }
+                    }
+
+
+
+
+                } else {
+                    BookDetailsFragment first_lp_transaction = (BookDetailsFragment) fm.findFragmentByTag(first_l_p);
+                    BookDetailsFragment second_lp_transaction = (BookDetailsFragment) fm.findFragmentByTag(second_l_p);
+
+
+                    if (first_lp_transaction != null) {
+
+                        Book previous_book = first_lp_transaction.getbook();
+                        BookDetailsFragment replace_old_landscape = BookDetailsFragment.newInstance(previous_book);
+                        fm.beginTransaction().remove(first_lp_transaction);
+                        fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections), null).commit();
+                        fm.beginTransaction().replace(R.id.container1, replace_old_landscape, second_p_l).addToBackStack(null).commit();
+
+                    } else {
+                        if (second_lp_transaction != null) {
+
+                            Book previous_book = second_lp_transaction.getbook();
+                            BookDetailsFragment replace_old_landscape = BookDetailsFragment.newInstance(previous_book);
+                            fm.beginTransaction().remove(second_lp_transaction);
+                            fm.beginTransaction().replace(R.id.container1, replace_old_landscape, second_p_l).addToBackStack(null).commit();
+
+                        } else {
+
+                            fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
+                        }
+
+
+                    }
+
+
+
+
                 }
+
             }
 
 
@@ -107,15 +169,14 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
         if (twoPane) {
-            System.out.println("you have clicked on me on " + index);
-            System.out.println(books.get(index).getAUTHOR());
-            bookDetailsFragment.displayBook(books.get(index));
+            Book currentbook = books.get(index);
+            bookDetailsFragment = BookDetailsFragment.newInstance(currentbook);
+            // add the list
+            fm.beginTransaction().replace(R.id.container2, bookDetailsFragment, first_l_p).commit();
+
+
         } else {
-            System.out.println("you have clicked on me on " + index);
-            System.out.println(books.get(index).getAUTHOR());
-
-            fm.beginTransaction().replace(R.id.container1, BookDetailsFragment.newInstance(books.get(index))).addToBackStack(null).commit();
-
+            fm.beginTransaction().replace(R.id.container1, BookDetailsFragment.newInstance(books.get(index)), first_p_l).addToBackStack(null).commit();
 
         }
     }

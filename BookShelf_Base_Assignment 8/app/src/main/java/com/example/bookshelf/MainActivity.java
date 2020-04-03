@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     FragmentManager fm;
     boolean twoPane;
 
-    final String first_p_l = "firstpl";
-    final String first_l_p = "firstlp";
-    final String second_p_l = "seondpl";
-    final String second_l_p = "secondlp";
+    String first_p_l = "firstpl";
+    String first_l_p = "firstlp";
+    String second_p_l = "seondpl";
+    String second_l_p = "secondlp";
 
 
     @Override
@@ -68,42 +68,66 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
                 if (twoPane) {
                     BookDetailsFragment first_pl_transaction = (BookDetailsFragment) fm.findFragmentByTag(first_p_l);
+                    BookDetailsFragment second_pl_transaction = (BookDetailsFragment) fm.findFragmentByTag(second_p_l);
+
                     BookListFragment bookListFragment = BookListFragment.newInstance(books_collections);
 
-                    if (first_pl_transaction != null) {
-                        System.out.println("you got from the selection");
-                        Book previous_book = first_pl_transaction.getbook();
+                    if(second_pl_transaction!=null){
+                        System.out.println("landing in second p1 transaction");
+                        Book previous_book = second_pl_transaction.getbook();
                         BookDetailsFragment replace_old_portrait = BookDetailsFragment.newInstance(previous_book);
-                        fm.beginTransaction().remove(first_pl_transaction);
-
-
+                        fm.beginTransaction().remove(second_pl_transaction);
                         fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
                         fm.beginTransaction().replace(R.id.container2, replace_old_portrait, second_l_p).commit();
-
-                    } else {
-                        System.out.println("You haven't selected, this is your firstime");
-                        fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
-
                     }
+                    else{
+                        if(first_pl_transaction!=null){
+                            System.out.println("last arrived");
+                            Book previous_book = first_pl_transaction.getbook();
+                            BookDetailsFragment replace_old_portrait = BookDetailsFragment.newInstance(previous_book);
+                            fm.beginTransaction().remove(first_pl_transaction);
+                            fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
+                            fm.beginTransaction().replace(R.id.container2, replace_old_portrait, second_l_p).commit();
+                        }else{
+                            fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
+                        }
+                    }
+
+
+
 
                 } else {
                     BookDetailsFragment first_lp_transaction = (BookDetailsFragment) fm.findFragmentByTag(first_l_p);
+                    BookDetailsFragment second_lp_transaction = (BookDetailsFragment) fm.findFragmentByTag(second_l_p);
+
 
                     if (first_lp_transaction != null) {
-                        System.out.println("you have somethin here");
 
                         Book previous_book = first_lp_transaction.getbook();
                         BookDetailsFragment replace_old_landscape = BookDetailsFragment.newInstance(previous_book);
                         fm.beginTransaction().remove(first_lp_transaction);
-                        fm.beginTransaction().replace(R.id.container1,BookListFragment.newInstance(books_collections),null).commit();
-                        fm.beginTransaction().replace(R.id.container1,replace_old_landscape,second_p_l).addToBackStack(null).commit();
+                        fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections), null).commit();
+                        fm.beginTransaction().replace(R.id.container1, replace_old_landscape, second_p_l).addToBackStack(null).commit();
 
                     } else {
-                        System.out.println("you haven't click it");
-                        fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
+                        if (second_lp_transaction != null) {
+
+                            Book previous_book = second_lp_transaction.getbook();
+                            BookDetailsFragment replace_old_landscape = BookDetailsFragment.newInstance(previous_book);
+                            fm.beginTransaction().remove(second_lp_transaction);
+                            fm.beginTransaction().replace(R.id.container1, replace_old_landscape, second_p_l).addToBackStack(null).commit();
+
+                        } else {
+
+                            fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
+                        }
 
 
                     }
+
+
+
+
                 }
 
             }

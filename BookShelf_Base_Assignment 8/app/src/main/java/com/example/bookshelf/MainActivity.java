@@ -65,12 +65,12 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     books_collections.add(new_book);
                 }
 
+                BookListFragment bookListFragment = BookListFragment.newInstance(books_collections);
 
                 if (twoPane) {
                     BookDetailsFragment first_pl_transaction = (BookDetailsFragment) fm.findFragmentByTag(first_p_l);
                     BookDetailsFragment second_pl_transaction = (BookDetailsFragment) fm.findFragmentByTag(second_p_l);
 
-                    BookListFragment bookListFragment = BookListFragment.newInstance(books_collections);
 
                     if(second_pl_transaction!=null){
                         System.out.println("landing in second p1 transaction");

@@ -44,11 +44,16 @@ public class BookDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
-                savedInstanceState.getParcelable(SAVE_BOOK);
+            if (savedInstanceState.getParcelable(SAVE_BOOK) != null) {
+                book = savedInstanceState.getParcelable(SAVE_BOOK);
+                System.out.println("the pass value is book : " + book.getAUTHOR());
+            } else {
+                //do nothing
+            }
         } else if (getArguments() != null) {
+
             book = (Book) getArguments().getParcelable(BOOK_KEY);
-        }else{
-            //donothing
+
         }
     }
 

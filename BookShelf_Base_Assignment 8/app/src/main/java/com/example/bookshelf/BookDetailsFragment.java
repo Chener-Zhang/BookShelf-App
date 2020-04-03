@@ -2,6 +2,7 @@ package com.example.bookshelf;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.Parcelable;
@@ -18,10 +19,18 @@ public class BookDetailsFragment extends Fragment {
 
     private static final String BOOK_KEY = "book";
     private Book book;
-
+    private static final String SAVE_BOOK = "save_book";
     TextView titleTextView, authorTextView;
 
-    public BookDetailsFragment() {}
+    public BookDetailsFragment() {
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(SAVE_BOOK, this.book);
+    }
 
     public static BookDetailsFragment newInstance(Book book) {
         BookDetailsFragment fragment = new BookDetailsFragment();
@@ -34,8 +43,12 @@ public class BookDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (savedInstanceState != null) {
+                savedInstanceState.getParcelable(SAVE_BOOK);
+        } else if (getArguments() != null) {
             book = (Book) getArguments().getParcelable(BOOK_KEY);
+        }else{
+            //donothing
         }
     }
 
@@ -46,20 +59,13 @@ public class BookDetailsFragment extends Fragment {
 
         titleTextView = v.findViewById(R.id.titleTextView);
         authorTextView = v.findViewById(R.id.authorTextView);
-        /*
-        Because this fragment can be created with or without
-        a book to display when attached, we need to make sure
-        we don't try to display a book if one isn't provided
-         */
+
         if (book != null)
             displayBook(book);
         return v;
     }
 
-    /*
-    This method is used both internally and externally (from the activity)
-    to display a book
-     */
+
     public void displayBook(Book book) {
         titleTextView.setText(book.getTITLE());
         authorTextView.setText(book.getAUTHOR());

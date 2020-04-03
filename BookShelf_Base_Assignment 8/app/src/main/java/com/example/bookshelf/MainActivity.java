@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     bookDetailsFragment = new BookDetailsFragment();
                     fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
                 }
+
             }
 
 

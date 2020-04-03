@@ -2,7 +2,6 @@ package com.example.bookshelf;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.Parcelable;
@@ -10,9 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.io.Serializable;
-import java.util.HashMap;
 
 
 public class BookDetailsFragment extends Fragment {
@@ -25,6 +21,9 @@ public class BookDetailsFragment extends Fragment {
     public BookDetailsFragment() {
     }
 
+    public Book getbook(){
+        return book;
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -65,8 +64,11 @@ public class BookDetailsFragment extends Fragment {
         titleTextView = v.findViewById(R.id.titleTextView);
         authorTextView = v.findViewById(R.id.authorTextView);
 
-        if (book != null)
+        if (book != null) {
             displayBook(book);
+        }else {
+            System.out.println("something goes wrong!!!!!");
+        }
         return v;
     }
 

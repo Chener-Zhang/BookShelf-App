@@ -62,11 +62,31 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     books_collections.add(new_book);
                 }
 
-                fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
 
                 if (twoPane) {
-                    bookDetailsFragment = new BookDetailsFragment();
-                    fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                    BookDetailsFragment old_fragment_portrait = (BookDetailsFragment) fm.findFragmentByTag("from_protrait");
+                    if(old_fragment_portrait == null){
+                        bookDetailsFragment = new BookDetailsFragment();
+                        fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                    }else{
+                        Book previous_book = old_fragment_portrait.getbook();
+                        BookDetailsFragment replace_old_portrait = BookDetailsFragment.newInstance(previous_book);
+                        fm.beginTransaction().replace(R.id.container2, replace_old_portrait).commit();
+
+                    }
+
+                }else{
+                    BookDetailsFragment old_fragment_landscape = (BookDetailsFragment) fm.findFragmentByTag("from_landscape");
+
+                    if(old_fragment_landscape == null){
+                        fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
+                    }else{
+                        Book previous_book = old_fragment_landscape.getbook();
+                        BookDetailsFragment replace_old_landscape = BookDetailsFragment.newInstance(previous_book);
+
+                        fm.beginTransaction().replace(R.id.container1,BookListFragment.newInstance(books_collections),null).commit();
+                        fm.beginTransaction().replace(R.id.container1,replace_old_landscape,null).addToBackStack(null).commit();
+                    }
                 }
 
             }
@@ -108,15 +128,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
         if (twoPane) {
-            System.out.println("you have clicked on me on " + index);
-            System.out.println(books.get(index).getAUTHOR());
-            bookDetailsFragment.displayBook(books.get(index));
+            Book currentbook = books.get(index);
+            bookDetailsFragment = BookDetailsFragment.newInstance(currentbook);
+            fm.beginTransaction().replace(R.id.container2,bookDetailsFragment,"from_landscape").commit();
+
+
         } else {
-            System.out.println("you have clicked on me on " + index);
-            System.out.println(books.get(index).getAUTHOR());
-
-            fm.beginTransaction().replace(R.id.container1, BookDetailsFragment.newInstance(books.get(index))).addToBackStack(null).commit();
-
+            fm.beginTransaction().replace(R.id.container1, BookDetailsFragment.newInstance(books.get(index)),"from_protrait").addToBackStack(null).commit();
 
         }
     }

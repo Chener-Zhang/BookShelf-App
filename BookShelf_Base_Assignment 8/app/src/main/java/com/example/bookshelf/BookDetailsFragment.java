@@ -4,33 +4,29 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 
 public class BookDetailsFragment extends Fragment {
 
     private static final String BOOK_KEY = "book";
-    private HashMap<String, String> book;
+    private Book book;
 
     TextView titleTextView, authorTextView;
 
     public BookDetailsFragment() {}
 
-    public static BookDetailsFragment newInstance(HashMap<String, String> book) {
+    public static BookDetailsFragment newInstance(Book book) {
         BookDetailsFragment fragment = new BookDetailsFragment();
         Bundle args = new Bundle();
-
-        /*
-         A HashMap implements the Serializable interface
-         therefore we can place a HashMap inside a bundle
-         by using that put() method.
-         */
-        args.putSerializable(BOOK_KEY, book);
+        args.putParcelable(BOOK_KEY, (Parcelable) book);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,7 +35,7 @@ public class BookDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            book = (HashMap) getArguments().getSerializable(BOOK_KEY);
+            book = (Book) getArguments().getParcelable(BOOK_KEY);
         }
     }
 
@@ -50,7 +46,6 @@ public class BookDetailsFragment extends Fragment {
 
         titleTextView = v.findViewById(R.id.titleTextView);
         authorTextView = v.findViewById(R.id.authorTextView);
-
         /*
         Because this fragment can be created with or without
         a book to display when attached, we need to make sure
@@ -65,8 +60,8 @@ public class BookDetailsFragment extends Fragment {
     This method is used both internally and externally (from the activity)
     to display a book
      */
-    public void displayBook(HashMap<String, String> book) {
-        titleTextView.setText(book.get("title"));
-        authorTextView.setText(book.get("author"));
+    public void displayBook(Book book) {
+        titleTextView.setText(book.getTITLE());
+        authorTextView.setText(book.getAUTHOR());
     }
 }

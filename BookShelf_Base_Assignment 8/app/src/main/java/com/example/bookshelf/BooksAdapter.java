@@ -83,7 +83,7 @@ public class BooksAdapter extends BaseAdapter implements Filterable {
                 constraint = constraint.toString().toUpperCase();
                 ArrayList<Book> found_collection = new ArrayList<Book>();
                 for (int i = 0; i < book_list.size(); i++) {
-                    if (book_list.get(i).getAUTHOR().toUpperCase().contains(constraint)) {
+                    if (book_list.get(i).getAUTHOR().toUpperCase().contains(constraint)||book_list.get(i).getTITLE().toUpperCase().contains(constraint)) {
                         found_collection.add(book_list.get(i));
 
                     }

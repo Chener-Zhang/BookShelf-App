@@ -3,6 +3,7 @@ package com.example.bookshelf;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.Parcelable;
@@ -60,6 +61,12 @@ public class BookListFragment extends Fragment {
         if (getArguments() != null) {
             books = (ArrayList) getArguments().getParcelableArrayList(BOOK_LIST_KEY);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
     }
 
     @Override

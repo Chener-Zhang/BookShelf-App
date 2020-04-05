@@ -95,16 +95,14 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                 twoPane = findViewById(R.id.container2) != null;
                 fm = getSupportFragmentManager();
 
+
                 fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
 
+
                 if (twoPane) {
-                    if (saved) {
-                        bookDetailsFragment = BookDetailsFragment.newInstance(books_collections.get(global_book_selected));
-                        fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
-                    } else {
-                        bookDetailsFragment = new BookDetailsFragment();
-                        fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
-                    }
+                    bookDetailsFragment = new BookDetailsFragment();
+                    fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                    
                 }
 
 
@@ -150,11 +148,10 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     @Override
     public void bookSelected(int index, ArrayList<Book> books) {
-
+        global_book_selected = index;
         if (twoPane) {
             bookDetailsFragment.displayBook(books.get(index));
         } else {
-            global_book_selected = index;
             fm.beginTransaction().replace(R.id.container1, BookDetailsFragment.newInstance(books.get(index))).addToBackStack(null).commit();
 
         }

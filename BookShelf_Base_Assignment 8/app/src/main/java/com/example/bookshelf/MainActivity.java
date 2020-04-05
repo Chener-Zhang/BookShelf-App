@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,11 +32,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     boolean twoPane;
     Context context = this;
     RequestQueue requestQueue;
+    final String url_passing_key = "url_key";
 
 
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putString(url_passing_key,global_url);
     }
 
     @Override
@@ -45,6 +48,16 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         twoPane = findViewById(R.id.container2) != null;
 
 
+        if(savedInstanceState!=null){
+            global_url = savedInstanceState.getString(url_passing_key);
+            System.out.println("your saving url is " + global_url);
+        }else{
+            System.out.println("you have nothing to save");
+        }
+
+        get_data();
+
+        /*
         get_data();
 
         twoPane = findViewById(R.id.container2) != null;
@@ -55,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             bookDetailsFragment = new BookDetailsFragment();
             fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
         }
-
+        */
 
     }
 
@@ -96,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     private void get_data() {
 
         Button button = findViewById(R.id.search_button);
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,10 +124,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     pass_data.execute();
                     create_list();
                 }
-
             }
         });
-
 
     }
 

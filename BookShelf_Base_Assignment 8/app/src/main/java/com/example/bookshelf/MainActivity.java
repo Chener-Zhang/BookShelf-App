@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     final String url = "https://kamorris.com/lab/abp/booksearch.php?search=";
     FragmentManager fm;
     boolean twoPane;
-    Context context = this;
     RequestQueue requestQueue;
 
     final String url_passing_key = "url_key";
@@ -90,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
                 if (twoPane) {
+
                     bookDetailsFragment = new BookDetailsFragment();
                     fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
                 }

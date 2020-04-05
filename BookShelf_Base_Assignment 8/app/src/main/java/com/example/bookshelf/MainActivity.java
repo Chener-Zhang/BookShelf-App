@@ -1,12 +1,14 @@
 package com.example.bookshelf;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,143 +25,119 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
     BookDetailsFragment bookDetailsFragment;
-    String url = "https://kamorris.com/lab/abp/booksearch.php?";
+    final String url = "https://kamorris.com/lab/abp/booksearch.php?search=";
     FragmentManager fm;
     boolean twoPane;
+    RequestQueue requestQueue;
 
-    String first_p_l = "firstpl";
-    String first_l_p = "firstlp";
-    String second_p_l = "seondpl";
-    String second_l_p = "secondlp";
+    final String url_passing_key = "url_key";
+    public String global_url = "https://kamorris.com/lab/abp/booksearch.php?search=";
 
+
+    boolean saved = false;
+    String saved_boolean = "saved";
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
-
+        saved = true;
+        outState.putBoolean(saved_boolean, saved);
+        outState.putString(url_passing_key, global_url);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        twoPane = findViewById(R.id.container2) != null;
-
-        getTestBooks_connection(new VolleyCallback() {
-            ArrayList<Book> books_collections = new ArrayList<Book>();
-
-            @Override
-            public void get_data(JSONArray response) throws JSONException {
-                int books_collection_length = response.length();
-                fm = getSupportFragmentManager();
-                System.out.println("rotated");
 
 
-                for (int i = 0; i < books_collection_length; i++) {
-                    int book_id = response.getJSONObject(i).getInt("book_id");
-                    String book_title = response.getJSONObject(i).getString("title");
-                    String book_author = response.getJSONObject(i).getString("author");
-                    String book_cover_url = response.getJSONObject(i).getString("cover_url");
-                    Book new_book = new Book(book_id, book_title, book_author, book_cover_url);
-                    books_collections.add(new_book);
-                }
+        if (savedInstanceState != null) {
+            global_url = savedInstanceState.getString(url_passing_key);
+            saved = savedInstanceState.getBoolean(saved_boolean);
+            create_list();
+            set_onclick();
+        } else {
+            set_onclick();
 
-                BookListFragment bookListFragment = BookListFragment.newInstance(books_collections);
-
-                if (twoPane) {
-                    BookDetailsFragment first_pl_transaction = (BookDetailsFragment) fm.findFragmentByTag(first_p_l);
-                    BookDetailsFragment second_pl_transaction = (BookDetailsFragment) fm.findFragmentByTag(second_p_l);
-
-
-                    if(second_pl_transaction!=null){
-                        System.out.println("landing in second p1 transaction");
-                        Book previous_book = second_pl_transaction.getbook();
-                        BookDetailsFragment replace_old_portrait = BookDetailsFragment.newInstance(previous_book);
-                        fm.beginTransaction().remove(second_pl_transaction);
-                        fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
-                        fm.beginTransaction().replace(R.id.container2, replace_old_portrait, second_l_p).commit();
-                    }
-                    else{
-                        if(first_pl_transaction!=null){
-                            System.out.println("last arrived");
-                            Book previous_book = first_pl_transaction.getbook();
-                            BookDetailsFragment replace_old_portrait = BookDetailsFragment.newInstance(previous_book);
-                            fm.beginTransaction().remove(first_pl_transaction);
-                            fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
-                            fm.beginTransaction().replace(R.id.container2, replace_old_portrait, second_l_p).commit();
-                        }else{
-                            fm.beginTransaction().replace(R.id.container1, bookListFragment).commit();
-                        }
-                    }
-
-
-
-
-                } else {
-                    BookDetailsFragment first_lp_transaction = (BookDetailsFragment) fm.findFragmentByTag(first_l_p);
-                    BookDetailsFragment second_lp_transaction = (BookDetailsFragment) fm.findFragmentByTag(second_l_p);
-
-
-                    if (first_lp_transaction != null) {
-
-                        Book previous_book = first_lp_transaction.getbook();
-                        BookDetailsFragment replace_old_landscape = BookDetailsFragment.newInstance(previous_book);
-                        fm.beginTransaction().remove(first_lp_transaction);
-                        fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections), null).commit();
-                        fm.beginTransaction().replace(R.id.container1, replace_old_landscape, second_p_l).addToBackStack(null).commit();
-
-                    } else {
-                        if (second_lp_transaction != null) {
-
-                            Book previous_book = second_lp_transaction.getbook();
-                            BookDetailsFragment replace_old_landscape = BookDetailsFragment.newInstance(previous_book);
-                            fm.beginTransaction().remove(second_lp_transaction);
-                            fm.beginTransaction().replace(R.id.container1, replace_old_landscape, second_p_l).addToBackStack(null).commit();
-
-                        } else {
-
-                            fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
-                        }
-
-
-                    }
-
-
-
-
-                }
-
-            }
-
-
-        });
+        }
 
 
     }
 
 
-    private void getTestBooks_connection(final VolleyCallback callback) {
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
-
+    public boolean create_list() {
+        requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(global_url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 System.out.println("connection success");
-                try {
-                    callback.get_data(response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                int books_collection_length = response.length();
+                ArrayList<Book> books_collections = new ArrayList<Book>();
+                for (int i = 0; i < books_collection_length; i++) {
+                    try {
+                        int book_id = response.getJSONObject(i).getInt("book_id");
+                        String book_title = response.getJSONObject(i).getString("title");
+                        String book_author = response.getJSONObject(i).getString("author");
+                        String book_cover_url = response.getJSONObject(i).getString("cover_url");
+                        Book new_book = new Book(book_id, book_title, book_author, book_cover_url);
+                        books_collections.add(new_book);
+                        System.out.println(new_book.book_printer());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+
+
+                twoPane = findViewById(R.id.container2) != null;
+                fm = getSupportFragmentManager();
+
+
+                fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
+
+
+                if (twoPane) {
+                    bookDetailsFragment = new BookDetailsFragment();
+                    fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                    
+                }
+
+
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("connection fail");
             }
         });
+
         requestQueue.add(jsonArrayRequest);
+        return true;
+    }
+
+
+    private void set_onclick() {
+
+        Button button = findViewById(R.id.search_button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("you click it");
+                EditText mytext = findViewById(R.id.my_search_bar);
+                String user_input = mytext.getText().toString();
+                if (user_input.length() > 0) {
+                    global_url = url + user_input;
+                    PASS_URL_DATA pass_data = new PASS_URL_DATA(global_url);
+                    pass_data.execute();
+                    create_list();
+                } else {
+                    PASS_URL_DATA pass_data = new PASS_URL_DATA(url);
+                    pass_data.execute();
+                    create_list();
+                }
+            }
+        });
 
     }
 
@@ -167,23 +145,29 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     public void bookSelected(int index, ArrayList<Book> books) {
 
-
         if (twoPane) {
-            Book currentbook = books.get(index);
-            bookDetailsFragment = BookDetailsFragment.newInstance(currentbook);
-            // add the list
-            fm.beginTransaction().replace(R.id.container2, bookDetailsFragment, first_l_p).commit();
-
-
+            bookDetailsFragment.displayBook(books.get(index));
         } else {
-            fm.beginTransaction().replace(R.id.container1, BookDetailsFragment.newInstance(books.get(index)), first_p_l).addToBackStack(null).commit();
+            fm.beginTransaction().replace(R.id.container1, BookDetailsFragment.newInstance(books.get(index))).addToBackStack(null).commit();
 
+        }
+    }
+
+    public class PASS_URL_DATA extends AsyncTask<String, String, String> {
+        String current_data;
+
+        public PASS_URL_DATA(String url_data) {
+            current_data = url_data;
+
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            global_url = current_data;
+            return null;
         }
     }
 
 
 }
 
-interface VolleyCallback {
-    void get_data(JSONArray response) throws JSONException;
-}

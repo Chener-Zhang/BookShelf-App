@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -23,22 +24,14 @@ public class BookDetailsFragment extends Fragment {
 
     private static final String BOOK_KEY = "book";
     private Book book;
-    private static final String SAVE_BOOK = "save_book";
+
     TextView titleTextView, authorTextView;
     ImageView imageView;
 
     public BookDetailsFragment() {
     }
 
-    public Book getbook(){
-        return book;
-    }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(SAVE_BOOK, this.book);
-    }
 
     public static BookDetailsFragment newInstance(Book book) {
         BookDetailsFragment fragment = new BookDetailsFragment();
@@ -51,15 +44,7 @@ public class BookDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            if (savedInstanceState.getParcelable(SAVE_BOOK) != null) {
-                book = savedInstanceState.getParcelable(SAVE_BOOK);
-                System.out.println("the pass value is book : " + book.getAUTHOR());
-            } else {
-                //do nothing
-            }
-        } else if (getArguments() != null) {
-
+        if (getArguments() != null) {
             book = (Book) getArguments().getParcelable(BOOK_KEY);
 
         }
@@ -74,11 +59,8 @@ public class BookDetailsFragment extends Fragment {
         authorTextView = v.findViewById(R.id.authorTextView);
         imageView = v.findViewById(R.id.my_image);
 
-
         if (book != null) {
             displayBook(book);
-        }else {
-            System.out.println("something goes wrong!!!!!");
         }
         return v;
     }
@@ -92,9 +74,10 @@ public class BookDetailsFragment extends Fragment {
     }
 
 
-    private class GET_IMG extends AsyncTask<String,Void,Bitmap>{
+    private class GET_IMG extends AsyncTask<String, Void, Bitmap> {
         ImageView imageView;
-        public GET_IMG(ImageView img){
+
+        public GET_IMG(ImageView img) {
             this.imageView = img;
         }
 
@@ -103,7 +86,7 @@ public class BookDetailsFragment extends Fragment {
         protected Bitmap doInBackground(String... strings) {
             String link = strings[0];
             Bitmap map = null;
-            try{
+            try {
                 InputStream inputStream = new java.net.URL(link).openStream();
                 map = BitmapFactory.decodeStream(inputStream);
             } catch (MalformedURLException e) {

@@ -27,7 +27,6 @@ public class BookListFragment extends Fragment {
     private static final String BOOK_LIST_KEY = "booklist";
     private ArrayList<Book> books;
     BookSelectedInterface parentActivity;
-    Context main_context;
 
 
 
@@ -68,37 +67,14 @@ public class BookListFragment extends Fragment {
         ListView listView = (ListView) inflater.inflate(R.layout.fragment_book_list, container, false);
 
 
-        final BooksAdapter adapter = new BooksAdapter(getContext(),books);
+        BooksAdapter adapter = new BooksAdapter(getContext(),books);
         listView.setAdapter(adapter);
-
-        EditText search_bar = getActivity().findViewById(R.id.my_search_bar);
-
-
-
-        search_bar.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    adapter.getFilter().filter(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println(position);
                 parentActivity.bookSelected(position, books);
             }
         });

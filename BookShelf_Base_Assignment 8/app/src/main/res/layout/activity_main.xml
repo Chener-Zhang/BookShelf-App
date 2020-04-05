@@ -9,15 +9,16 @@
 
     <EditText
         android:id="@+id/my_search_bar"
-        android:layout_width="329dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
         android:hint="@string/search_bar"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
     </EditText>
 
     <FrameLayout
@@ -33,4 +34,16 @@
         app:layout_constraintVertical_bias="0.0">
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.381"
+        app:layout_constraintStart_toEndOf="@+id/my_search_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

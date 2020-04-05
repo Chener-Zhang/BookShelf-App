@@ -3,7 +3,10 @@ package com.example.bookshelf;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     String url = "https://kamorris.com/lab/abp/booksearch.php?";
     FragmentManager fm;
     boolean twoPane;
+    Context context = this;
+    RequestQueue requestQueue;
 
 
     @Override
@@ -32,61 +37,94 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         twoPane = findViewById(R.id.container2) != null;
-
-        getTestBooks_connection(new VolleyCallback() {
-            ArrayList<Book> books_collections = new ArrayList<Book>();
-
+        get_data(new VolleyCallback() {
             @Override
-            public void get_data(JSONArray response) throws JSONException {
-                System.out.println("you have reach here");
-                int books_collection_length = response.length();
+            public void onSuccess(ArrayList<Book> books_collection) throws JSONException {
+
+                twoPane = findViewById(R.id.container2) != null;
+
                 fm = getSupportFragmentManager();
 
-                for (int i = 0; i < books_collection_length; i++) {
-                    int book_id = response.getJSONObject(i).getInt("book_id");
-                    String book_title = response.getJSONObject(i).getString("title");
-                    String book_author = response.getJSONObject(i).getString("author");
-                    String book_cover_url = response.getJSONObject(i).getString("cover_url");
-                    Book new_book = new Book(book_id, book_title, book_author, book_cover_url);
-                    books_collections.add(new_book);
-                }
-
-                fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
-
+                fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collection)).commit();
                 if (twoPane) {
                     bookDetailsFragment = new BookDetailsFragment();
                     fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
                 }
+
             }
-
-
         });
 
 
     }
 
+    public void research(final URLCallBack urlCallBack){
+        Button button = findViewById(R.id.search_button);
 
-    private void getTestBooks_connection(final VolleyCallback callback) {
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
-
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(JSONArray response) {
-                System.out.println("connection success");
+            public void onClick(View v) {
+                EditText editText = findViewById(R.id.my_search_bar);
+                String user_input = editText.getText().toString();
+                String url_new = url+user_input;
+
                 try {
-                    callback.get_data(response);
+                    urlCallBack.get_url(context,url_new);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-        }, new Response.ErrorListener() {
+        });
+    }
+    private void get_data(final VolleyCallback callback) {
+
+        research(new URLCallBack() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("connection fail");
+            public void get_url(Context context, String url_string) throws JSONException {
+
+
+                System.out.println(url_string);
+                requestQueue = Volley.newRequestQueue(context);
+                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url_string, new Response.Listener<JSONArray>() {
+                    ArrayList<Book> books_collections = new ArrayList<Book>();
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        System.out.println("connection success");
+                        int books_collection_length = response.length();
+                        ArrayList<Book> books_collections = new ArrayList<Book>();
+                        for (int i = 0; i < books_collection_length; i++) {
+                            try {
+                                int book_id = response.getJSONObject(i).getInt("book_id");
+                                String book_title = response.getJSONObject(i).getString("title");
+                                String book_author = response.getJSONObject(i).getString("author");
+                                String book_cover_url = response.getJSONObject(i).getString("cover_url");
+                                Book new_book = new Book(book_id, book_title, book_author, book_cover_url);
+                                books_collections.add(new_book);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        try {
+                            callback.onSuccess(books_collections);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("connection fail");
+                    }
+                });
+                requestQueue.add(jsonArrayRequest);
+
+
+
             }
         });
-        requestQueue.add(jsonArrayRequest);
+
+
 
     }
 
@@ -94,14 +132,10 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     public void bookSelected(int index, ArrayList<Book> books) {
 
-
         if (twoPane) {
-            System.out.println("you have clicked on me on " + index);
-            System.out.println(books.get(index).getAUTHOR());
+            
             bookDetailsFragment.displayBook(books.get(index));
         } else {
-            System.out.println("you have clicked on me on " + index);
-            System.out.println(books.get(index).getAUTHOR());
 
             fm.beginTransaction().replace(R.id.container1,BookDetailsFragment.newInstance(books.get(index))).addToBackStack(null).commit();
 
@@ -113,5 +147,9 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 }
 
 interface VolleyCallback {
-    void get_data(JSONArray response) throws JSONException;
+    void onSuccess(ArrayList<Book> books_collection) throws JSONException;
+}
+
+interface URLCallBack {
+    void get_url(Context context, String url_string) throws JSONException;
 }

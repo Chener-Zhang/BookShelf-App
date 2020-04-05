@@ -1,5 +1,6 @@
 package com.example.bookshelf;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,20 +9,36 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.HashMap;
-
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class BookDetailsFragment extends Fragment {
 
     private static final String BOOK_KEY = "book";
     private Book book;
-
+    private static final String SAVE_BOOK = "save_book";
     TextView titleTextView, authorTextView;
+    ImageView imageView;
 
-    public BookDetailsFragment() {}
+    public BookDetailsFragment() {
+    }
+
+    public Book getbook(){
+        return book;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(SAVE_BOOK, this.book);
+    }
 
     public static BookDetailsFragment newInstance(Book book) {
         BookDetailsFragment fragment = new BookDetailsFragment();
@@ -34,8 +51,17 @@ public class BookDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getParcelable(SAVE_BOOK) != null) {
+                book = savedInstanceState.getParcelable(SAVE_BOOK);
+                System.out.println("the pass value is book : " + book.getAUTHOR());
+            } else {
+                //do nothing
+            }
+        } else if (getArguments() != null) {
+
             book = (Book) getArguments().getParcelable(BOOK_KEY);
+
         }
     }
 
@@ -46,22 +72,52 @@ public class BookDetailsFragment extends Fragment {
 
         titleTextView = v.findViewById(R.id.titleTextView);
         authorTextView = v.findViewById(R.id.authorTextView);
-        /*
-        Because this fragment can be created with or without
-        a book to display when attached, we need to make sure
-        we don't try to display a book if one isn't provided
-         */
-        if (book != null)
+        imageView = v.findViewById(R.id.my_image);
+
+
+        if (book != null) {
             displayBook(book);
+        }else {
+            System.out.println("something goes wrong!!!!!");
+        }
         return v;
     }
 
-    /*
-    This method is used both internally and externally (from the activity)
-    to display a book
-     */
+
     public void displayBook(Book book) {
         titleTextView.setText(book.getTITLE());
         authorTextView.setText(book.getAUTHOR());
+        GET_IMG img = new GET_IMG(imageView);
+        img.execute(book.getCOVER_URL());
+    }
+
+
+    private class GET_IMG extends AsyncTask<String,Void,Bitmap>{
+        ImageView imageView;
+        public GET_IMG(ImageView img){
+            this.imageView = img;
+        }
+
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            String link = strings[0];
+            Bitmap map = null;
+            try{
+                InputStream inputStream = new java.net.URL(link).openStream();
+                map = BitmapFactory.decodeStream(inputStream);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return map;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
     }
 }

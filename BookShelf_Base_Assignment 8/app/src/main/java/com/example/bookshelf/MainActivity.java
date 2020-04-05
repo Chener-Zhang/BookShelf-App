@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     final String url_passing_key = "url_key";
     public String global_url = "https://kamorris.com/lab/abp/booksearch.php?search=";
 
-    int global_book_selected;
-    String book_selected_key = "book_key";
 
     boolean saved = false;
     String saved_boolean = "saved";
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         saved = true;
         outState.putBoolean(saved_boolean, saved);
         outState.putString(url_passing_key, global_url);
-        outState.putInt(book_selected_key, global_book_selected);
     }
 
     @Override
@@ -56,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
         if (savedInstanceState != null) {
             global_url = savedInstanceState.getString(url_passing_key);
-            global_book_selected = savedInstanceState.getInt(book_selected_key);
             saved = savedInstanceState.getBoolean(saved_boolean);
             create_list();
             set_onclick();
@@ -148,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     @Override
     public void bookSelected(int index, ArrayList<Book> books) {
-        global_book_selected = index;
+
         if (twoPane) {
             bookDetailsFragment.displayBook(books.get(index));
         } else {

@@ -32,16 +32,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     RequestQueue requestQueue;
 
     final String url_passing_key = "url_key";
-    final String collection_passing_key = "collection_key";
     public String global_url = "https://kamorris.com/lab/abp/booksearch.php?search=";
-    public ArrayList<Book> global_books_collection = new ArrayList<>();
 
 
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(url_passing_key, global_url);
-        outState.putParcelableArrayList(collection_passing_key, global_books_collection);
     }
 
     @Override
@@ -49,18 +46,14 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        create_list();
-        System.out.println("the size " + global_books_collection.size());
 
+        if(savedInstanceState!=null){
+                global_url = savedInstanceState.getString(url_passing_key);
+                create_list();
+                set_onclick();
+        }else{
+            set_onclick();
 
-        twoPane = findViewById(R.id.container2) != null;
-        fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(global_books_collection)).commit();
-
-
-        if (twoPane) {
-            bookDetailsFragment = new BookDetailsFragment();
-            fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
         }
 
 
@@ -89,8 +82,17 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     }
                 }
 
-                PASS_COLLECTION pass_collection = new PASS_COLLECTION(global_books_collection);
-                pass_collection.execute();
+
+
+                twoPane = findViewById(R.id.container2) != null;
+                fm = getSupportFragmentManager();
+                fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
+
+
+                if (twoPane) {
+                    bookDetailsFragment = new BookDetailsFragment();
+                    fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                }
 
 
             }
@@ -162,19 +164,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         }
     }
 
-    public class PASS_COLLECTION extends AsyncTask<ArrayList<Book>, ArrayList<Book>, ArrayList<Book>> {
-        ArrayList<Book> current_collection;
 
-        public PASS_COLLECTION(ArrayList<Book> collectin_data) {
-            current_collection = collectin_data;
-        }
-
-        @Override
-        protected ArrayList<Book> doInBackground(ArrayList<Book>... arrayLists) {
-            global_books_collection = (ArrayList<Book>) current_collection.clone();
-            return null;
-
-        }
-    }
 }
 

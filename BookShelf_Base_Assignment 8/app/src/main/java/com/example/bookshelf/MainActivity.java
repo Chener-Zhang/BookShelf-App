@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
     BookDetailsFragment bookDetailsFragment;
-    String url = "https://kamorris.com/lab/abp/booksearch.php?";
+    String url = "https://kamorris.com/lab/abp/booksearch.php?search=";
     FragmentManager fm;
     boolean twoPane;
     Context context = this;
@@ -33,10 +33,30 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
     @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        research(new URLCallBack() {
+            @Override
+            public void get_url(Context context, String url_string) throws JSONException {
+                outState.putString("url",url_string);
+            }
+        });
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         twoPane = findViewById(R.id.container2) != null;
+
+
+        if(savedInstanceState!=null){
+            System.out.println("i got it ");
+            String url = savedInstanceState.getString("url");
+            System.out.println(url);
+        }
+
+
         get_data(new VolleyCallback() {
             @Override
             public void onSuccess(ArrayList<Book> books_collection) throws JSONException {

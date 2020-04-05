@@ -33,11 +33,19 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     final String url_passing_key = "url_key";
     public String global_url = "https://kamorris.com/lab/abp/booksearch.php?search=";
 
+    int global_book_selected;
+    String book_selected_key = "book_key";
+
+    boolean saved = false;
+    String saved_boolean = "saved";
 
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
+        saved = true;
+        outState.putBoolean(saved_boolean, saved);
         outState.putString(url_passing_key, global_url);
+        outState.putInt(book_selected_key, global_book_selected);
     }
 
     @Override
@@ -46,11 +54,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         setContentView(R.layout.activity_main);
 
 
-        if(savedInstanceState!=null){
-                global_url = savedInstanceState.getString(url_passing_key);
-                create_list();
-                set_onclick();
-        }else{
+        if (savedInstanceState != null) {
+            global_url = savedInstanceState.getString(url_passing_key);
+            global_book_selected = savedInstanceState.getInt(book_selected_key);
+            saved = savedInstanceState.getBoolean(saved_boolean);
+            create_list();
+            set_onclick();
+        } else {
             set_onclick();
 
         }
@@ -82,16 +92,19 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                 }
 
 
-
                 twoPane = findViewById(R.id.container2) != null;
                 fm = getSupportFragmentManager();
+
                 fm.beginTransaction().replace(R.id.container1, BookListFragment.newInstance(books_collections)).commit();
 
-
                 if (twoPane) {
-
-                    bookDetailsFragment = new BookDetailsFragment();
-                    fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                    if (saved) {
+                        bookDetailsFragment = BookDetailsFragment.newInstance(books_collections.get(global_book_selected));
+                        fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                    } else {
+                        bookDetailsFragment = new BookDetailsFragment();
+                        fm.beginTransaction().replace(R.id.container2, bookDetailsFragment).commit();
+                    }
                 }
 
 
@@ -139,12 +152,10 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     public void bookSelected(int index, ArrayList<Book> books) {
 
         if (twoPane) {
-
             bookDetailsFragment.displayBook(books.get(index));
         } else {
-
+            global_book_selected = index;
             fm.beginTransaction().replace(R.id.container1, BookDetailsFragment.newInstance(books.get(index))).addToBackStack(null).commit();
-
 
         }
     }

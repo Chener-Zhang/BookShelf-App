@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         //testing
         AudiobookService audiobookService = new AudiobookService();
         MediaControlBinder mediaControlBinder = audiobookService.new MediaControlBinder();
+        mediaControlBinder.play(2);
         //testing
 
         /*

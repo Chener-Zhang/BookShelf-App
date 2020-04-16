@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import edu.temple.audiobookplayer.AudiobookService;
+import edu.temple.audiobookplayer.AudiobookService.MediaControlBinder;
 
 public class MainActivity extends AppCompatActivity implements BookListFragment.BookSelectedInterface {
 
@@ -46,10 +47,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
         searchEditText = findViewById(R.id.searchEditText);
+
+
+        //testing
+        AudiobookService audiobookService = new AudiobookService();
+        MediaControlBinder mediaControlBinder = audiobookService.new MediaControlBinder();
+        //testing
 
         /*
         Perform a search

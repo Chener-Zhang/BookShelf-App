@@ -3,7 +3,12 @@ package com.example.bookshelf;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,6 +16,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.AndroidAuthenticator;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     EditText searchEditText;
 
+
     private final String SEARCH_API = "https://kamorris.com/lab/abp/booksearch.php?search=";
 
     @Override
@@ -50,11 +57,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         searchEditText = findViewById(R.id.searchEditText);
 
 
-        //testing
-        AudiobookService audiobookService = new AudiobookService();
-        MediaControlBinder mediaControlBinder = audiobookService.new MediaControlBinder();
-        mediaControlBinder.play(2);
-        //testing
 
         /*
         Perform a search
@@ -73,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         if (savedInstanceState != null) {
             books = savedInstanceState.getParcelableArrayList(BOOKS_KEY);
             selectedBook = savedInstanceState.getParcelable(SELECTED_BOOK_KEY);
-        }
-        else
+        } else
             books = new ArrayList<Book>();
 
         twoPane = findViewById(R.id.container2) != null;
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
         fm.beginTransaction()
                 .replace(R.id.container1, bookListFragment)
-        .commit();
+                .commit();
 
         /*
         If we have two containers available, load a single instance
@@ -139,10 +140,10 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                         try {
                             JSONObject bookJSON;
                             bookJSON = response.getJSONObject(i);
-                            books.add(new Book (bookJSON.getInt(Book.JSON_ID),
+                            books.add(new Book(bookJSON.getInt(Book.JSON_ID),
                                     bookJSON.getString(Book.JSON_TITLE),
                                     bookJSON.getString(Book.JSON_AUTHOR),
-                                    bookJSON.getString(Book.JSON_COVER_URL),bookJSON.getInt(Book.JSON_DURATION)));
+                                    bookJSON.getString(Book.JSON_COVER_URL), bookJSON.getInt(Book.JSON_DURATION)));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -159,7 +160,9 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             }
         });
         requestQueue.add(jsonArrayRequest);
-    };
+    }
+
+    ;
 
     private void updateBooksDisplay() {
         /*

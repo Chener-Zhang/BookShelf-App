@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: artifacts:audiobook-player:unspecified@jar">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/audiobook-player/build/.transforms/324b94797253e27d7c75122368146ff5/jetified-audiobook-player/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/audiobook-player/build/.transforms/324b94797253e27d7c75122368146ff5/jetified-audiobook-player/res" />
+      <root url="jar://$PROJECT_DIR$/audiobook-player/build/.transforms/692e527c974b44dd46bee3b79274fa5b/jetified-audiobook-player/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/audiobook-player/build/.transforms/692e527c974b44dd46bee3b79274fa5b/jetified-audiobook-player/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

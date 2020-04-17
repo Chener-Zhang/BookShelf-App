@@ -47,50 +47,39 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     EditText searchEditText;
     AudiobookService.MediaControlBinder binder;
+
     private final String SEARCH_API = "https://kamorris.com/lab/abp/booksearch.php?search=";
 
-
-    boolean isConnect = false;
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(this, AudiobookService.class);
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+    }
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            binder = (AudiobookService.MediaControlBinder)service;
-            System.out.println("connection success");
-            isConnect = true;
+            binder = (AudiobookService.MediaControlBinder) service;
+            binder.play(1);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            System.out.println("connection fail");
-            isConnect = false;
+
         }
     };
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbindService(serviceConnection);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //binding service setup
-        Intent intent = new Intent(this, AudiobookService.class);
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-        //binding service setup
-
+        searchEditText = findViewById(R.id.searchEditText);
 
 
         /*
         Perform a search
          */
-        searchEditText = findViewById(R.id.searchEditText);
         findViewById(R.id.searchButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     /*
     Fetch a set of "books" from from the web service API
      */
-
     private void fetchBooks(String searchString) {
         /*
         A Volloy JSONArrayRequest will automatically convert a JSON Array response from
@@ -233,5 +221,4 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         outState.putParcelableArrayList(BOOKS_KEY, books);
         outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
     }
-
 }

@@ -77,4 +77,8 @@ public class BookDetailsFragment extends Fragment {
         // No need to download separately.
         Picasso.get().load(book.getCoverUrl()).into(coverImageView);
     }
+    interface audio_control{
+        void play(int i);
+    }
+
 }

@@ -46,19 +46,20 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     Book selectedBook;
 
     EditText searchEditText;
-    AudiobookService.MediaControlBinder binder;
     private final String SEARCH_API = "https://kamorris.com/lab/abp/booksearch.php?search=";
 
 
+    // audiobook connection
+    AudiobookService.MediaControlBinder binder;
     boolean isConnect = false;
-
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            binder = (AudiobookService.MediaControlBinder)service;
+            binder = (AudiobookService.MediaControlBinder) service;
             System.out.println("connection success");
             isConnect = true;
+            binder.play(1);
         }
 
         @Override
@@ -68,6 +69,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         }
     };
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(this, AudiobookService.class);
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+
+    }
 
     @Override
     protected void onDestroy() {
@@ -79,13 +87,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //binding service setup
-        Intent intent = new Intent(this, AudiobookService.class);
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-        //binding service setup
-
-
 
         /*
         Perform a search

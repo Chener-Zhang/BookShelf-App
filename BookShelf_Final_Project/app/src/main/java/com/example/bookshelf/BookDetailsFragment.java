@@ -31,6 +31,8 @@ public class BookDetailsFragment extends Fragment {
 
     //Buttons
     Button play_button;
+    Button pause_button;
+    Button stop_button;
 
     public BookDetailsFragment() {
     }
@@ -79,10 +81,27 @@ public class BookDetailsFragment extends Fragment {
 
         //button setup
         play_button = v.findViewById(R.id.play_button);
+        pause_button = v.findViewById(R.id.pause_button);
+        stop_button = v.findViewById(R.id.stop__button);
+
         play_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 parent.play(book.getId());
+            }
+        });
+
+        pause_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parent.pause();
+            }
+        });
+
+        stop_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parent.stop();
             }
         });
         /*

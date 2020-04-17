@@ -247,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     @Override
     public void stop() {
+        binder.stop();
 
     }
 

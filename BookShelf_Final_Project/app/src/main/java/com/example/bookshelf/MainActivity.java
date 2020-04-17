@@ -30,7 +30,7 @@ import java.util.HashMap;
 import edu.temple.audiobookplayer.AudiobookService;
 import edu.temple.audiobookplayer.AudiobookService.MediaControlBinder;
 
-public class MainActivity extends AppCompatActivity implements BookListFragment.BookSelectedInterface {
+public class MainActivity extends AppCompatActivity implements BookListFragment.BookSelectedInterface ,BookDetailsFragment.audio_control{
 
     private static final String BOOKS_KEY = "books";
     private static final String SELECTED_BOOK_KEY = "selectedBook";
@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             binder = (AudiobookService.MediaControlBinder) service;
             System.out.println("connection success");
             isConnect = true;
-            binder.play(1);
         }
 
         @Override
@@ -235,4 +234,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
     }
 
+    @Override
+    public void play(int i) {
+        binder.play(i);
+    }
 }

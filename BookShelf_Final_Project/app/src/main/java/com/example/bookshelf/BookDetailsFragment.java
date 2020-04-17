@@ -1,5 +1,6 @@
 package com.example.bookshelf;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +25,15 @@ public class BookDetailsFragment extends Fragment {
     TextView titleTextView, authorTextView;
     ImageView coverImageView;
 
-    public BookDetailsFragment() {}
+
+    //parent
+    audio_control parent;
+
+    //Buttons
+    Button play_button;
+
+    public BookDetailsFragment() {
+    }
 
     public static BookDetailsFragment newInstance(Book book) {
         BookDetailsFragment fragment = new BookDetailsFragment();
@@ -48,6 +58,17 @@ public class BookDetailsFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof audio_control) {
+            parent = (audio_control) context;
+        } else {
+            throw new RuntimeException("Please implement the required interface(s)");
+        }
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_book_details, container, false);
@@ -56,6 +77,14 @@ public class BookDetailsFragment extends Fragment {
         authorTextView = v.findViewById(R.id.authorTextView);
         coverImageView = v.findViewById(R.id.coverImageView);
 
+        //button setup
+        play_button = v.findViewById(R.id.play_button);
+        play_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parent.play(book.getId());
+            }
+        });
         /*
         Because this fragment can be created with or without
         a book to display when attached, we need to make sure
@@ -77,7 +106,8 @@ public class BookDetailsFragment extends Fragment {
         // No need to download separately.
         Picasso.get().load(book.getCoverUrl()).into(coverImageView);
     }
-    interface audio_control{
+
+    interface audio_control {
         void play(int i);
     }
 

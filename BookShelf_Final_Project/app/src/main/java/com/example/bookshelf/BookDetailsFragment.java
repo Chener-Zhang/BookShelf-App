@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class BookDetailsFragment extends Fragment {
 
     private static final String BOOK_KEY = "book";
-    private Book book;
+    public Book book;
 
     TextView titleTextView, authorTextView;
     ImageView coverImageView;
@@ -28,7 +28,7 @@ public class BookDetailsFragment extends Fragment {
 
     //parent
     audio_control parent;
-
+    int book_id;
     //Buttons
     Button play_button;
     Button pause_button;

@@ -30,10 +30,11 @@ import java.util.HashMap;
 import edu.temple.audiobookplayer.AudiobookService;
 import edu.temple.audiobookplayer.AudiobookService.MediaControlBinder;
 
-public class MainActivity extends AppCompatActivity implements BookListFragment.BookSelectedInterface ,BookDetailsFragment.audio_control{
+public class MainActivity extends AppCompatActivity implements BookListFragment.BookSelectedInterface, BookDetailsFragment.audio_control {
 
     private static final String BOOKS_KEY = "books";
     private static final String SELECTED_BOOK_KEY = "selectedBook";
+    private static final String SAVE = "saved";
 
     FragmentManager fm;
 
@@ -53,11 +54,15 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     AudiobookService.MediaControlBinder binder;
     boolean isConnect = false;
 
+
     @Override
     protected void onStart() {
         super.onStart();
+
+        System.out.println("first time connection");
         Intent intent = new Intent(this, AudiobookService.class);
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+
 
     }
 
@@ -106,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         if (savedInstanceState != null) {
             books = savedInstanceState.getParcelableArrayList(BOOKS_KEY);
             selectedBook = savedInstanceState.getParcelable(SELECTED_BOOK_KEY);
+            isConnect = savedInstanceState.getBoolean(SAVE);
         } else
             books = new ArrayList<Book>();
 
@@ -135,10 +141,12 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         us to limit the amount of things we have to change in the Fragment's implementation.
          */
         if (twoPane) {
-            if (selectedBook != null)
+            if (selectedBook != null) {
                 bookDetailsFragment = BookDetailsFragment.newInstance(selectedBook);
-            else
+
+            } else {
                 bookDetailsFragment = new BookDetailsFragment();
+            }
 
             fm.beginTransaction()
                     .replace(R.id.container2, bookDetailsFragment)
@@ -209,11 +217,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     public void bookSelected(int index) {
         selectedBook = books.get(index);
-        if (twoPane)
+        if (twoPane){
             /*
             Display selected book using previously attached fragment
              */
             bookDetailsFragment.displayBook(selectedBook);
+            bookDetailsFragment.book = selectedBook;
+        }
         else {
             /*
             Display book using new fragment
@@ -233,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         // Save previously searched books as well as selected book
         outState.putParcelableArrayList(BOOKS_KEY, books);
         outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
+        outState.putBoolean(SAVE, isConnect);
     }
 
     @Override

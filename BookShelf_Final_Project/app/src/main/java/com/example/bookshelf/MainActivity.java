@@ -53,6 +53,21 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     AudiobookService.MediaControlBinder binder;
     boolean isConnect = false;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(this, AudiobookService.class);
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println("disconncected");
+        unbindService(serviceConnection);
+    }
+
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -67,20 +82,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             isConnect = false;
         }
     };
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Intent intent = new Intent(this, AudiobookService.class);
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbindService(serviceConnection);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,4 +239,16 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     public void play(int i) {
         binder.play(i);
     }
+
+    @Override
+    public void pause() {
+        binder.pause();
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+
 }

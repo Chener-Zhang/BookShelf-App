@@ -109,6 +109,9 @@ public class BookDetailsFragment extends Fragment {
 
     interface audio_control {
         void play(int i);
+        void pause();
+        void stop();
+
     }
 
 }

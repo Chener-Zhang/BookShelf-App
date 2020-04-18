@@ -260,5 +260,11 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         binder.stop();
     }
 
+    @Override
+    public void seekbar(Book book) {
+        System.out.println(book.getDuration());
+
+    }
+
 
 }

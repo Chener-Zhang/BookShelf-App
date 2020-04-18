@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -33,6 +34,7 @@ public class BookDetailsFragment extends Fragment {
     Button play_button;
     Button pause_button;
     Button stop_button;
+    SeekBar seekBar;
 
     public BookDetailsFragment() {
     }
@@ -84,10 +86,17 @@ public class BookDetailsFragment extends Fragment {
         pause_button = v.findViewById(R.id.pause_button);
         stop_button = v.findViewById(R.id.stop__button);
 
+        //seekbar_setup
+        seekBar = v.findViewById(R.id.music_progressBar);
+
+
+
+
         play_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 parent.play(book.getId());
+                parent.seekbar(book);
             }
         });
 
@@ -130,6 +139,7 @@ public class BookDetailsFragment extends Fragment {
         void play(int i);
         void pause();
         void stop();
+        void seekbar(Book book);
 
     }
 

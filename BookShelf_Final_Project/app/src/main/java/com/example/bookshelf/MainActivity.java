@@ -90,8 +90,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     protected void onStart() {
         super.onStart();
-        service_intent = new Intent(this, AudiobookService.class);
-        bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
+
     }
 
     @Override
@@ -99,6 +98,10 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        service_intent = new Intent(this, AudiobookService.class);
+        startService(service_intent);
+        bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
 
         /*
         Perform a search

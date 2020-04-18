@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     private static final String BOOKS_KEY = "books";
     private static final String SELECTED_BOOK_KEY = "selectedBook";
-    private static final String SAVE = "saved";
+
 
     FragmentManager fm;
 
@@ -53,25 +53,18 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     // audiobook connection
     AudiobookService.MediaControlBinder binder;
     boolean isConnect = false;
+    Intent service_intent;
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-        System.out.println("first time connection");
-        Intent intent = new Intent(this, AudiobookService.class);
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-
-
+        // Save previously searched books as well as selected book
+        outState.putParcelableArrayList(BOOKS_KEY, books);
+        outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.out.println("disconncected");
-        unbindService(serviceConnection);
-    }
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -89,9 +82,23 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     };
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(serviceConnection);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        service_intent = new Intent(this, AudiobookService.class);
+        bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         /*
         Perform a search
@@ -111,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         if (savedInstanceState != null) {
             books = savedInstanceState.getParcelableArrayList(BOOKS_KEY);
             selectedBook = savedInstanceState.getParcelable(SELECTED_BOOK_KEY);
-            isConnect = savedInstanceState.getBoolean(SAVE);
         } else
             books = new ArrayList<Book>();
 
@@ -217,14 +223,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     public void bookSelected(int index) {
         selectedBook = books.get(index);
-        if (twoPane){
+        if (twoPane) {
             /*
             Display selected book using previously attached fragment
              */
             bookDetailsFragment.displayBook(selectedBook);
             bookDetailsFragment.book = selectedBook;
-        }
-        else {
+        } else {
             /*
             Display book using new fragment
              */
@@ -234,16 +239,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                     .addToBackStack(null)
                     .commit();
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // Save previously searched books as well as selected book
-        outState.putParcelableArrayList(BOOKS_KEY, books);
-        outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
-        outState.putBoolean(SAVE, isConnect);
     }
 
     @Override
@@ -259,7 +254,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     public void stop() {
         binder.stop();
-
     }
 
 

@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        
         unbindService(serviceConnection);
     }
 

@@ -96,7 +96,6 @@ public class BookDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 parent.play(book.getId());
-                parent.seekbar(book);
             }
         });
 
@@ -139,7 +138,7 @@ public class BookDetailsFragment extends Fragment {
         void play(int i);
         void pause();
         void stop();
-        void seekbar(Book book);
+        void seekbar();
 
     }
 

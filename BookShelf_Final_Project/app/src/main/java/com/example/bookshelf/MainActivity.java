@@ -1,5 +1,6 @@
 package com.example.bookshelf;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -8,9 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     AudiobookService.MediaControlBinder binder;
     boolean isConnect = false;
     Intent service_intent;
+    Handler handler;
 
 
     @Override
@@ -70,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             binder = (AudiobookService.MediaControlBinder) service;
+            binder.setProgressHandler(handler);
             System.out.println("connection success");
             isConnect = true;
         }
@@ -103,6 +109,17 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         service_intent = new Intent(this, AudiobookService.class);
         startService(service_intent);
         bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
+
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                AudiobookService.BookProgress bookProgress = (AudiobookService.BookProgress)msg.obj;
+                System.out.println("current playing " + bookProgress.getProgress());
+
+            }
+        };
+
+
 
         /*
         Perform a search
@@ -261,8 +278,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     }
 
     @Override
-    public void seekbar(Book book) {
-        System.out.println(book.getDuration());
+    public void seekbar() {
 
     }
 

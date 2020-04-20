@@ -15,6 +15,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -110,12 +111,21 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         startService(service_intent);
         bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
 
-        handler = new Handler(){
+
+        handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                AudiobookService.BookProgress bookProgress = (AudiobookService.BookProgress)msg.obj;
-                System.out.println("current playing " + bookProgress.getProgress());
+                AudiobookService.BookProgress bookProgress = (AudiobookService.BookProgress) msg.obj;
 
+                if (bookProgress == null) {
+
+                }
+                else {
+
+                    System.out.println("current playing " + bookProgress.getProgress());
+                }
+                //SeekBar seekBar = findViewById(R.id.music_progressBar);
+                //seekBar.setProgress(bookProgress.getProgress());
             }
         };
 

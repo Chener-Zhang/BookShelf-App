@@ -1,16 +1,28 @@
 package com.example.bookshelf;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.AndroidAuthenticator;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -22,11 +34,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import edu.temple.audiobookplayer.AudiobookService;
+import edu.temple.audiobookplayer.AudiobookService.MediaControlBinder;
 
-public class MainActivity extends AppCompatActivity implements BookListFragment.BookSelectedInterface {
+public class MainActivity extends AppCompatActivity implements BookListFragment.BookSelectedInterface, BookDetailsFragment.audio_control {
 
     private static final String BOOKS_KEY = "books";
     private static final String SELECTED_BOOK_KEY = "selectedBook";
+
 
     FragmentManager fm;
 
@@ -39,8 +53,53 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     Book selectedBook;
 
     EditText searchEditText;
-
     private final String SEARCH_API = "https://kamorris.com/lab/abp/booksearch.php?search=";
+
+
+    // audiobook connection
+    AudiobookService.MediaControlBinder binder;
+    boolean isConnect = false;
+    Intent service_intent;
+    Handler handler;
+    final static String playing_text = "current playing : ";
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Save previously searched books as well as selected book
+        outState.putParcelableArrayList(BOOKS_KEY, books);
+        outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
+    }
+
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder = (AudiobookService.MediaControlBinder) service;
+            binder.setProgressHandler(handler);
+            System.out.println("connection success");
+            isConnect = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            System.out.println("connection fail");
+            isConnect = false;
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(serviceConnection);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +107,17 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         setContentView(R.layout.activity_main);
 
 
+        service_intent = new Intent(this, AudiobookService.class);
+        startService(service_intent);
+        bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
+        seekbar();
 
-        searchEditText = findViewById(R.id.searchEditText);
+
 
         /*
         Perform a search
          */
+        searchEditText = findViewById(R.id.searchEditText);
         findViewById(R.id.searchButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,8 +132,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         if (savedInstanceState != null) {
             books = savedInstanceState.getParcelableArrayList(BOOKS_KEY);
             selectedBook = savedInstanceState.getParcelable(SELECTED_BOOK_KEY);
-        }
-        else
+        } else
             books = new ArrayList<Book>();
 
         twoPane = findViewById(R.id.container2) != null;
@@ -86,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
         fm.beginTransaction()
                 .replace(R.id.container1, bookListFragment)
-        .commit();
+                .commit();
 
         /*
         If we have two containers available, load a single instance
@@ -98,10 +161,12 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         us to limit the amount of things we have to change in the Fragment's implementation.
          */
         if (twoPane) {
-            if (selectedBook != null)
+            if (selectedBook != null) {
                 bookDetailsFragment = BookDetailsFragment.newInstance(selectedBook);
-            else
+
+            } else {
                 bookDetailsFragment = new BookDetailsFragment();
+            }
 
             fm.beginTransaction()
                     .replace(R.id.container2, bookDetailsFragment)
@@ -120,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     /*
     Fetch a set of "books" from from the web service API
      */
+
     private void fetchBooks(String searchString) {
         /*
         A Volloy JSONArrayRequest will automatically convert a JSON Array response from
@@ -134,10 +200,10 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                         try {
                             JSONObject bookJSON;
                             bookJSON = response.getJSONObject(i);
-                            books.add(new Book (bookJSON.getInt(Book.JSON_ID),
+                            books.add(new Book(bookJSON.getInt(Book.JSON_ID),
                                     bookJSON.getString(Book.JSON_TITLE),
                                     bookJSON.getString(Book.JSON_AUTHOR),
-                                    bookJSON.getString(Book.JSON_COVER_URL),bookJSON.getInt(Book.JSON_DURATION)));
+                                    bookJSON.getString(Book.JSON_COVER_URL), bookJSON.getInt(Book.JSON_DURATION)));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -154,7 +220,9 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
             }
         });
         requestQueue.add(jsonArrayRequest);
-    };
+    }
+
+    ;
 
     private void updateBooksDisplay() {
         /*
@@ -169,12 +237,13 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     public void bookSelected(int index) {
         selectedBook = books.get(index);
-        if (twoPane)
+        if (twoPane) {
             /*
             Display selected book using previously attached fragment
              */
             bookDetailsFragment.displayBook(selectedBook);
-        else {
+            bookDetailsFragment.book = selectedBook;
+        } else {
             /*
             Display book using new fragment
              */
@@ -187,11 +256,79 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // Save previously searched books as well as selected book
-        outState.putParcelableArrayList(BOOKS_KEY, books);
-        outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
+    public void play(int i, Book book) {
+        binder.play(i);
     }
+
+    @Override
+    public void pause() {
+        binder.pause();
+    }
+
+    @Override
+    public void stop() {
+        binder.stop();
+    }
+
+    @Override
+    public void seekbar() {
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                AudiobookService.BookProgress bookProgress = (AudiobookService.BookProgress) msg.obj;
+                if (bookProgress == null) {
+                }
+                else {
+                    Book current_book  = getbook_byID(bookProgress.getBookId());
+                    System.out.println("the current book is " + current_book);
+                    double duration = current_book.getDuration() * 1.0;
+                    double haven_play = bookProgress.getProgress() * 1.0;
+                    double progress = (haven_play/duration) * 100;
+                    System.out.println(progress);
+                    int progress_int = (int) progress;
+
+                    SeekBar seekBar = findViewById(R.id.music_progressBar);
+                    TextView textView = findViewById(R.id.current_playing);
+                    if(seekBar == null){
+                        System.out.println("this is a null object");
+                    }else{
+                        System.out.println("this is not a null object");
+                        seekBar.setProgress(progress_int);
+                        textView.setText(playing_text + current_book.getTitle());
+                    }
+
+                }
+            }
+        };
+
+    }
+
+    @Override
+    public void seekbar_change(int progress, Book book) {
+
+
+        double d = progress/100.0;
+        double current_real = d * book.getDuration();
+        int current_progress = (int) current_real;
+        binder.play(book.getId(),current_progress);
+
+        System.out.println("----------seekbar_change----------");
+        System.out.println("the current drag progress: " + progress + "%");
+        System.out.println("book total duration : " + book.getDuration());
+        System.out.println("the actual progress in seekbar_change: " + current_progress);
+        System.out.println("----------seekbar_change----------");
+
+    }
+
+    public Book getbook_byID(int book_id){
+            for(Book book : books){
+                if(book.getId() == book_id){
+                    return book;
+                }
+            }
+        return null;
+    }
+
+
+
 }

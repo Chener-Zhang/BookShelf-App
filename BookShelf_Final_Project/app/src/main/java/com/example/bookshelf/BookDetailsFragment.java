@@ -1,5 +1,6 @@
 package com.example.bookshelf;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -18,12 +21,23 @@ import java.util.HashMap;
 public class BookDetailsFragment extends Fragment {
 
     private static final String BOOK_KEY = "book";
-    private Book book;
+    public Book book;
 
     TextView titleTextView, authorTextView;
     ImageView coverImageView;
 
-    public BookDetailsFragment() {}
+
+    //parent
+    audio_control parent;
+    int book_id;
+    //Buttons
+    Button play_button;
+    Button pause_button;
+    Button stop_button;
+    SeekBar seekBar;
+
+    public BookDetailsFragment() {
+    }
 
     public static BookDetailsFragment newInstance(Book book) {
         BookDetailsFragment fragment = new BookDetailsFragment();
@@ -48,6 +62,17 @@ public class BookDetailsFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof audio_control) {
+            parent = (audio_control) context;
+        } else {
+            throw new RuntimeException("Please implement the required interface(s)");
+        }
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_book_details, container, false);
@@ -55,6 +80,60 @@ public class BookDetailsFragment extends Fragment {
         titleTextView = v.findViewById(R.id.titleTextView);
         authorTextView = v.findViewById(R.id.authorTextView);
         coverImageView = v.findViewById(R.id.coverImageView);
+
+        //button setup
+        play_button = v.findViewById(R.id.play_button);
+        pause_button = v.findViewById(R.id.pause_button);
+        stop_button = v.findViewById(R.id.stop__button);
+
+
+
+
+
+
+        play_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parent.stop();
+                parent.play(book.getId(),book);
+            }
+        });
+
+        pause_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parent.pause();
+            }
+        });
+
+        stop_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parent.stop();
+            }
+        });
+
+
+        //seekbar_setup
+        seekBar = v.findViewById(R.id.music_progressBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                parent.stop();
+                parent.seekbar_change(seekBar.getProgress(), book);
+            }
+        });
+
 
         /*
         Because this fragment can be created with or without
@@ -77,4 +156,14 @@ public class BookDetailsFragment extends Fragment {
         // No need to download separately.
         Picasso.get().load(book.getCoverUrl()).into(coverImageView);
     }
+
+    interface audio_control {
+        void play(int i,Book book);
+        void pause();
+        void stop();
+        void seekbar();
+        void seekbar_change(int progress,Book book);
+
+    }
+
 }

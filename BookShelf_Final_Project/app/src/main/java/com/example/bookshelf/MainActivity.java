@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     boolean isConnect = false;
     Intent service_intent;
     Handler handler;
-
+    final static String playing_text = "current playing : ";
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -255,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     }
 
     @Override
-    public void play(int i) {
+    public void play(int i, Book book) {
         binder.play(i);
     }
 
@@ -278,20 +279,22 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                 if (bookProgress == null) {
                 }
                 else {
-                    System.out.println("the current book is " + selectedBook.getTitle());
-
-                    double duration = selectedBook.getDuration() * 1.0;
+                    Book current_book  = getbook_byID(bookProgress.getBookId());
+                    System.out.println("the current book is " + current_book);
+                    double duration = current_book.getDuration() * 1.0;
                     double haven_play = bookProgress.getProgress() * 1.0;
                     double progress = (haven_play/duration) * 100;
                     System.out.println(progress);
                     int progress_int = (int) progress;
 
                     SeekBar seekBar = findViewById(R.id.music_progressBar);
+                    TextView textView = findViewById(R.id.current_playing);
                     if(seekBar == null){
                         System.out.println("this is a null object");
                     }else{
                         System.out.println("this is not a null object");
                         seekBar.setProgress(progress_int);
+                        textView.setText(playing_text + current_book.getTitle());
                     }
 
                 }
@@ -315,9 +318,16 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         System.out.println("the actual progress in seekbar_change: " + current_progress);
         System.out.println("----------seekbar_change----------");
 
-
     }
 
+    public Book getbook_byID(int book_id){
+            for(Book book : books){
+                if(book.getId() == book_id){
+                    return book;
+                }
+            }
+        return null;
+    }
 
 
 

@@ -95,7 +95,7 @@ public class BookDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 parent.stop();
-                parent.play(book.getId());
+                parent.play(book.getId(),book);
             }
         });
 
@@ -158,7 +158,7 @@ public class BookDetailsFragment extends Fragment {
     }
 
     interface audio_control {
-        void play(int i);
+        void play(int i,Book book);
         void pause();
         void stop();
         void seekbar();

@@ -86,8 +86,7 @@ public class BookDetailsFragment extends Fragment {
         pause_button = v.findViewById(R.id.pause_button);
         stop_button = v.findViewById(R.id.stop__button);
 
-        //seekbar_setup
-        seekBar = v.findViewById(R.id.music_progressBar);
+
 
 
 
@@ -95,6 +94,7 @@ public class BookDetailsFragment extends Fragment {
         play_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                parent.stop();
                 parent.play(book.getId());
             }
         });
@@ -112,6 +112,29 @@ public class BookDetailsFragment extends Fragment {
                 parent.stop();
             }
         });
+
+
+        //seekbar_setup
+        seekBar = v.findViewById(R.id.music_progressBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                parent.stop();
+                parent.seekbar_change(seekBar.getProgress(), book);
+            }
+        });
+
+
         /*
         Because this fragment can be created with or without
         a book to display when attached, we need to make sure
@@ -139,6 +162,7 @@ public class BookDetailsFragment extends Fragment {
         void pause();
         void stop();
         void seekbar();
+        void seekbar_change(int progress,Book book);
 
     }
 

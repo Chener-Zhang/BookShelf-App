@@ -23,6 +23,7 @@ public class CanvasActivitiy extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canvas);
+
         box = (TextView) findViewById(R.id.color_text_view);
 
         getcolor = getIntent().getExtras().getString("color");

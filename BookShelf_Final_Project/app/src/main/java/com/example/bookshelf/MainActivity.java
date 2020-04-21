@@ -63,15 +63,9 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     Handler handler;
     SeekBar seekBar;
     final static String playing_text = "current playing : ";
+    AudiobookService.BookProgress bookProgress;
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
 
-        // Save previously searched books as well as selected book
-        outState.putParcelableArrayList(BOOKS_KEY, books);
-        outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
-    }
 
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
@@ -94,14 +88,20 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     protected void onDestroy() {
         super.onDestroy();
         unbindService(serviceConnection);
-        
+
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Save previously searched books as well as selected book
+        outState.putParcelableArrayList(BOOKS_KEY, books);
+        outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
+
 
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +113,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         startService(service_intent);
         bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
         seekbar();
-
-
 
         /*
         Perform a search
@@ -278,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                AudiobookService.BookProgress bookProgress = (AudiobookService.BookProgress) msg.obj;
+                bookProgress = (AudiobookService.BookProgress) msg.obj;
                 if (bookProgress == null) {
                 } else {
                     Book current_book  = getbook_byID(bookProgress.getBookId());

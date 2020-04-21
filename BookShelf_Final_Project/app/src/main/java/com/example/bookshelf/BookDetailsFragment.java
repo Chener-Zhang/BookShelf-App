@@ -116,6 +116,7 @@ public class BookDetailsFragment extends Fragment {
 
         //seekbar_setup
         seekBar = v.findViewById(R.id.music_progressBar);
+        seekBar.setMax(book.getDuration());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

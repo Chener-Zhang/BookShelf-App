@@ -7,8 +7,8 @@
     tools:context=".BookDetailsFragment">
 
     <LinearLayout
-        android:layout_width="486dp"
-        android:layout_height="233dp"
+        android:layout_width="431dp"
+        android:layout_height="226dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

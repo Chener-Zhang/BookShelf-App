@@ -51,7 +51,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/authorTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -68,15 +68,16 @@
 
     <TextView
         android:id="@+id/current_playing"
-        android:layout_width="131dp"
-        android:layout_height="39dp"
+        android:layout_width="166dp"
+        android:layout_height="49dp"
         android:text="current playing : "
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/titleTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/music_progressBar"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintVertical_bias="0.176" />
 
     <ImageView
         android:id="@+id/coverImageView"

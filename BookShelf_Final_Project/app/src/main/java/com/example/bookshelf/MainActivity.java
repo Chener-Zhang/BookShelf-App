@@ -62,7 +62,11 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     Intent service_intent;
     Handler handler;
     SeekBar seekBar;
+    AudiobookService.BookProgress bookProgress;
+
     final static String playing_text = "current playing : ";
+    final static String PREVIOUS_SECOND = "PREVIOUS_SECOND";
+    final static String PREVIOUS_BOOK_ID = "PREVIOUS_BOOK_ID";
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -71,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         // Save previously searched books as well as selected book
         outState.putParcelableArrayList(BOOKS_KEY, books);
         outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
+        outState.putInt(PREVIOUS_BOOK_ID,bookProgress.getBookId());
+        outState.putInt(PREVIOUS_SECOND,bookProgress.getProgress());
+
     }
 
 
@@ -94,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     protected void onDestroy() {
         super.onDestroy();
         unbindService(serviceConnection);
+        stopService(service_intent);
         
     }
 
@@ -113,6 +121,34 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         startService(service_intent);
         bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
         seekbar();
+
+
+
+
+        if(savedInstanceState!=null){
+                final int bookid = savedInstanceState.getInt(PREVIOUS_BOOK_ID);
+                final int booksecond = savedInstanceState.getInt(PREVIOUS_SECOND);
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //wait the connection
+                        while(!isConnect){
+                            System.out.println("connecting......");
+                        }
+                        //finished conencted
+                        binder.play(bookid,booksecond);
+                    }
+                }).start();
+        }
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
 
 
 
@@ -278,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                AudiobookService.BookProgress bookProgress = (AudiobookService.BookProgress) msg.obj;
+                bookProgress = (AudiobookService.BookProgress) msg.obj;
                 if (bookProgress == null) {
                 } else {
                     Book current_book  = getbook_byID(bookProgress.getBookId());

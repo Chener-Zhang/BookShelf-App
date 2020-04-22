@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     protected void onDestroy() {
         super.onDestroy();
         unbindService(serviceConnection);
-        stopService(service_intent);
+        //stopService(service_intent);
         
     }
 
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
         service_intent = new Intent(this, AudiobookService.class);
-        startService(service_intent);
+        //startService(service_intent);
         bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
         seekbar();
 

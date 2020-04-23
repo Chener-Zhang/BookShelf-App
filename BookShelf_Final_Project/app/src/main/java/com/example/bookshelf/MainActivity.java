@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         If we previously saved a book search and/or selected a book, then use that
         information to set up the necessary instance variables
          */
+
         if (savedInstanceState != null) {
             books = savedInstanceState.getParcelableArrayList(BOOKS_KEY);
             selectedBook = savedInstanceState.getParcelable(SELECTED_BOOK_KEY);
@@ -347,9 +348,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     }
 
-    public Book getbook_byID(int book_id) {
-        for (Book book : books) {
-            if (book.getId() == book_id) {
+
                 return book;
             }
         }

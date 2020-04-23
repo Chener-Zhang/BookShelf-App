@@ -281,20 +281,14 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
                 }
                 else {
                     Book current_book  = getbook_byID(bookProgress.getBookId());
-                    System.out.println("the current book is " + current_book);
-                    double duration = current_book.getDuration() * 1.0;
-                    double haven_play = bookProgress.getProgress() * 1.0;
-                    double progress = (haven_play/duration) * 100;
-                    System.out.println(progress);
-                    int progress_int = (int) progress;
-
                     SeekBar seekBar = findViewById(R.id.music_progressBar);
                     TextView textView = findViewById(R.id.current_playing);
+
                     if(seekBar == null){
                         System.out.println("this is a null object");
                     }else{
                         System.out.println("this is not a null object");
-                        seekBar.setProgress(progress_int);
+                        seekBar.setProgress(bookProgress.getProgress());
                         textView.setText(playing_text + current_book.getTitle());
                     }
 
@@ -308,16 +302,8 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     public void seekbar_change(int progress, Book book) {
 
 
-        double d = progress/100.0;
-        double current_real = d * book.getDuration();
-        int current_progress = (int) current_real;
-        binder.play(book.getId(),current_progress);
+        binder.play(book.getId(),progress);
 
-        System.out.println("----------seekbar_change----------");
-        System.out.println("the current drag progress: " + progress + "%");
-        System.out.println("book total duration : " + book.getDuration());
-        System.out.println("the actual progress in seekbar_change: " + current_progress);
-        System.out.println("----------seekbar_change----------");
 
     }
 

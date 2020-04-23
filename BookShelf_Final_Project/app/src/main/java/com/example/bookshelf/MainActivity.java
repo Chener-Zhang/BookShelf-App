@@ -61,12 +61,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     boolean isConnect = false;
     Intent service_intent;
     Handler handler;
-    SeekBar seekBar;
-    AudiobookService.BookProgress bookProgress;
-
     final static String playing_text = "current playing : ";
-    final static String PREVIOUS_SECOND = "PREVIOUS_SECOND";
-    final static String PREVIOUS_BOOK_ID = "PREVIOUS_BOOK_ID";
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -75,9 +70,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         // Save previously searched books as well as selected book
         outState.putParcelableArrayList(BOOKS_KEY, books);
         outState.putParcelable(SELECTED_BOOK_KEY, selectedBook);
-        outState.putInt(PREVIOUS_BOOK_ID,bookProgress.getBookId());
-        outState.putInt(PREVIOUS_SECOND,bookProgress.getProgress());
-
     }
 
 
@@ -101,8 +93,6 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     protected void onDestroy() {
         super.onDestroy();
         unbindService(serviceConnection);
-        //stopService(service_intent);
-        
     }
 
     @Override
@@ -118,37 +108,9 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
 
         service_intent = new Intent(this, AudiobookService.class);
-        //startService(service_intent);
+        startService(service_intent);
         bindService(service_intent, serviceConnection, Context.BIND_AUTO_CREATE);
         seekbar();
-
-
-
-
-        if(savedInstanceState!=null){
-                final int bookid = savedInstanceState.getInt(PREVIOUS_BOOK_ID);
-                final int booksecond = savedInstanceState.getInt(PREVIOUS_SECOND);
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //wait the connection
-                        while(!isConnect){
-                            System.out.println("connecting......");
-                        }
-                        //finished conencted
-                        binder.play(bookid,booksecond);
-                    }
-                }).start();
-        }
-
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
 
 
 
@@ -167,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
         If we previously saved a book search and/or selected a book, then use that
         information to set up the necessary instance variables
          */
+
         if (savedInstanceState != null) {
             books = savedInstanceState.getParcelableArrayList(BOOKS_KEY);
             selectedBook = savedInstanceState.getParcelable(SELECTED_BOOK_KEY);
@@ -310,31 +273,33 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
 
     @Override
     public void seekbar() {
-
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                bookProgress = (AudiobookService.BookProgress) msg.obj;
+                AudiobookService.BookProgress bookProgress = (AudiobookService.BookProgress) msg.obj;
                 if (bookProgress == null) {
-                } else {
+                }
+                else {
                     Book current_book  = getbook_byID(bookProgress.getBookId());
+                    System.out.println("the current book is " + current_book);
+                    double duration = current_book.getDuration() * 1.0;
+                    double haven_play = bookProgress.getProgress() * 1.0;
+                    double progress = (haven_play/duration) * 100;
+                    System.out.println(progress);
+                    int progress_int = (int) progress;
 
-                    seekBar = findViewById(R.id.music_progressBar);
-                    int current_playing = bookProgress.getProgress();
+                    SeekBar seekBar = findViewById(R.id.music_progressBar);
                     TextView textView = findViewById(R.id.current_playing);
-
-                    if (seekBar == null) {
+                    if(seekBar == null){
                         System.out.println("this is a null object");
-                    } else {
-                        seekBar.setProgress(current_playing);
-                        System.out.println("progress : " + current_playing);
+                    }else{
+                        System.out.println("this is not a null object");
+                        seekBar.setProgress(progress_int);
                         textView.setText(playing_text + current_book.getTitle());
                     }
 
                 }
-
             }
-
         };
 
     }
@@ -342,19 +307,29 @@ public class MainActivity extends AppCompatActivity implements BookListFragment.
     @Override
     public void seekbar_change(int progress, Book book) {
 
-        System.out.println(progress);
-        binder.play(book.getId(), progress);
+
+        double d = progress/100.0;
+        double current_real = d * book.getDuration();
+        int current_progress = (int) current_real;
+        binder.play(book.getId(),current_progress);
+
+        System.out.println("----------seekbar_change----------");
+        System.out.println("the current drag progress: " + progress + "%");
+        System.out.println("book total duration : " + book.getDuration());
+        System.out.println("the actual progress in seekbar_change: " + current_progress);
+        System.out.println("----------seekbar_change----------");
 
     }
 
-    public Book getbook_byID(int book_id) {
-        for (Book book : books) {
-            if (book.getId() == book_id) {
+    public Book getbook_byID(int book_id){
+        for(Book book : books){
+            if(book.getId() == book_id){
                 return book;
             }
         }
         return null;
     }
+
 
 
 }
